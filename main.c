@@ -1,9 +1,7 @@
-#define _POSIX_C_SOURCE 200809L
-#define _GNU_SOURCE
 #include "inclusions.h"
 /**
 *\brief Calculate eigenvalues of symmetric square matrices by Jacobi's algorithm
-*\fn {rotjacobi arg1 arg2}
+*\fn rotjacobi arg1 arg2
 *\param arg1 := input file with dim in the first ROW and the matrix element in the following
 *\param arg2 := output file with eigenvalues
 */
