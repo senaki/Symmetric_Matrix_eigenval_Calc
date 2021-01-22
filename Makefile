@@ -1,5 +1,5 @@
 rotjacobi : matrix.o jacobi.o main.o
-	gcc matrix.o jacobi.o main.o -lm -o rotjacobi
+	gcc matrix.o jacobi.o main.o -o rotjacobi
 matrix.o : matrix.c inclusions.h
 	gcc -std=gnu11 -W -Wall -lm -c matrix.c
 jacobi.o : matrix.c jacobi.c inclusions.h
