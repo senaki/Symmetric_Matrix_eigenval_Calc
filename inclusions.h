@@ -1,8 +1,9 @@
+#define _POSIX_C_SOURCE 200809L
+#define _GNU_SOURCE
 #ifndef INCLUSIONS_H_INCLUDED
 #define INCLUSIONS_H_INCLUDED
 #define author "SERGE KIKI"
 #define TOL 1E-6
-#define _POSIX_C_SOURCE 200809L
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
