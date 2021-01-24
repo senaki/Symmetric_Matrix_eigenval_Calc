@@ -5,7 +5,7 @@ matrix.o : matrix.c inclusions.h
 jacobi.o : matrix.c jacobi.c inclusions.h
 	gcc -std=gnu11 -W -Wall -lm -c jacobi.c
 main.o : matrix.c jacobi.c main.c inclusions.h
-	gcc -std=gnu11 -W -Wall -lm -c main.c
+	gcc -std=gnu11 -W -Wall -lm -O3 -c main.c
 	
 clean:
 	rm matrix.o jacobi.o main.o
