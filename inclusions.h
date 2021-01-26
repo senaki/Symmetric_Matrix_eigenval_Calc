@@ -13,7 +13,7 @@ extern char *strdup(const char *);
 extern int mat_print(unsigned int n,unsigned int m, double *in);//from an array
 extern int mat_write( unsigned int n,unsigned int m, double *a, char *file_name, char *mode );//from a file
 //--
-extern unsigned int jacobi(double *m, unsigned int n, double *spectre);
+extern unsigned int jacobi(const double *m, unsigned int n, double *spectre);
 extern int IsSym( unsigned int nrow, unsigned int ncol, double *in);//Check if the matrix is symmetric
 extern int IsOrtho(unsigned int n, double *in);
 extern void transpose(unsigned int nrow, unsigned int ncol, double *A, double *out);

@@ -7,7 +7,7 @@ m BY THE JACOBI'S ROTATION in a n-dimensional vectorial space
 * \param n {dimension of the square matrix}
 * \param p {Matrix reference}
 */
-unsigned int jacobi(double *M, unsigned int n, double *sp)
+unsigned int jacobi(const double *M, unsigned int n, double *sp)
 {
   unsigned int idx[2]={0,1}, i, j, Niteration=0 ;
   //count=0;
@@ -21,12 +21,13 @@ unsigned int jacobi(double *M, unsigned int n, double *sp)
   /*matrixsquare_read(file_name,&n, m);//if we need to read from a file:\
   Make a macro function for that purpose so it be possible to choose from either
   passing a matrix variable or reading from a file stream.*/
-  double mR[n][n], mTr[n][n], vP[n][n], *mat=(double *)malloc(n*n*sizeof(double));
+  double mR[n][n], mTr[n][n], vP[n][n], mat[n][n];
+  //(double *)malloc(n*n*sizeof(double));
   for(i=0; i< n; i++)
   {
     for(j=0; j < n; j++)
     {
-      mat[i*n+j]= *( M + i*n + j );
+      mat[i][j]= M[i*n + j];
     }
   }
   /*mR is the matrix of rotation
@@ -46,7 +47,7 @@ unsigned int jacobi(double *M, unsigned int n, double *sp)
     {
       for(j=i+1 ; j<n ; j++)
       {
-        if ( fabs(mat[n*idx[0]+idx[1]]) < fabs(mat[n*i+j]) )
+        if ( fabs(mat[idx[0]][idx[1]]) < fabs(mat[i][j]) )
         {
           idx[0]=i;
           idx[1]=j;
@@ -54,10 +55,10 @@ unsigned int jacobi(double *M, unsigned int n, double *sp)
       }
     }
     //END SEACHING FOR THE LARGEST OFF-DIAGONAL ELEMENT
-    max_mat=mat[n*idx[0]+idx[1]];
+    max_mat=mat[idx[0]][idx[1]];
     //BEGIN SETTING ROTATION ANGLE
-    theta = 2.*(*(mat+n*idx[0]+idx[1])) ;
-    theta /= ( *(mat+n*idx[1]+idx[1]) - *(mat+n*idx[0]+idx[0]) ) ;
+    theta = 2.*mat[idx[0]][idx[1]] ;
+    theta /= (mat[idx[1]][idx[1]] - mat[idx[0]][idx[0]]) ;
     theta = 0.5*atan( theta ) ;
     //END SETTING ROTATION ANGLE
     //BEGIN CREATION OF THE ROTATION MATRIX
@@ -78,13 +79,13 @@ unsigned int jacobi(double *M, unsigned int n, double *sp)
     mR[idx[0]][idx[0]] = cos(theta) ;
     //BEGIN ROTATION DE JACOBI
     transpose(n, n, &mR[0][0], &mTr[0][0]);//R^{1}->mTr
-    Cross(n,n,n,n, &mTr[0][0], mat, &vP[0][0] );//mTr*b->vP
-    Cross(n, n, n, n, &vP[0][0], &mR[0][0], mat );//vP*mR-> b
+    Cross(n,n,n,n, &mTr[0][0], &mat[0][0], &vP[0][0] );//mTr*b->vP
+    Cross(n, n, n, n, &vP[0][0], &mR[0][0], &mat[0][0]);//vP*mR-> b
     Niteration++ ;
   } while(fabs(max_mat) > TOL);
   //--END JACOBI
   for(i=0; i< n; i++){
-    *(sp+i)= mat[i+n*i] ;
+    *(sp+i)= mat[i][i] ;
   }
   //Créer plus tard une structure pour cette sortie
   //printf("Tolerance\tIteration\t|Precision|\tmax(Mat)\n%9.3g\t%9.3d\t%9.3g\t%8.3g\n", TOL,Niteration,pcsn, max_mat);

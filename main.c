@@ -1,5 +1,6 @@
 #include "inclusions.h"
 /**
+\author Serge Kiki
 *\brief Calculate eigenvalues of symmetric square matrices by Jacobi's algorithm
 *\fn rotjacobi arg1 arg2
 *\param arg1 := input file with dim in the first ROW and the matrix element in the following
@@ -7,10 +8,6 @@
 */
 const char msg[]="Eigen values of symmetric matrices calculated by the Jacobi's algorithm";
 void welcom_msg(const char *msg){
-	/*!
-	* \author Serge Kiki
-	* \brief Affiche un message d'accueil.
-	*/
 	printf("\033[33m") ;
 	for ( unsigned int i=0 ; i < strlen( msg ) ; i++ ) printf("*") ;
 	printf("\n%s\n%s\n", msg, author) ;
@@ -27,27 +24,26 @@ int main(int argc, char *argv[])
 		goto exit_failure ;
 	}
 
-	FILE *fidFLAG;//Pour afficher une seule fois le message d'accueil
-	static unsigned int FLAG;
-	if ( (fidFLAG=fopen("flag","r")) != NULL ){
-		fscanf(fidFLAG,"%u",&FLAG);
+	FILE *fidFLAG;
+	int status;
+	//Pour afficher une seule fois le message d'accueil
+	static unsigned int FLAG=0;
+	if ( (fidFLAG=fopen("flag","r")) == NULL ){
+		fidFLAG=fopen("flag", "w");
+		welcom_msg( msg );//Message d'accueil
+		FLAG++;
+		fprintf(fidFLAG,"%u", FLAG);
+		fclose(fidFLAG);
 	}
 	else {
-		FLAG=0	;
-		fidFLAG=fopen("flag", "w");
+		status=fscanf(fidFLAG,"%u", &FLAG);
+		FLAG++;
+		fprintf(fidFLAG,"%u", FLAG);
+		fclose(fidFLAG);
 	}
-
  //-------
 	unsigned int i, j, dim=2,//dimension de la matrice
 	Niteration=0 ;//Nombre d'itérations
-	int status;
-	//Message d'accueil
-	if(FLAG==0){
-		welcom_msg( msg );
-		FLAG++;
-		fprintf(fidFLAG,"%u", FLAG);
-	}
-	fclose(fidFLAG);
 	char //*inPath=dirname(argv[1]),
 	*inName=strdup(argv[1]),//duplique argv
 	*inFName=basename(inName),//extrait le nom de fichier
@@ -59,8 +55,6 @@ int main(int argc, char *argv[])
 	*spc=NULL; //Matrice lire et spectre des valeurs propres
 	FILE *fout,//spectre
 	*fNiteration ;//nombre d'itérations
-	//Lecture de la matrice
-
 	//-------------------------------
 	FILE *flux = fopen( argv[1], "r" );
 	status=fscanf( flux, "%u\n", &dim ) ;

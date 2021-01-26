@@ -2,7 +2,7 @@
 REM:Makefie
 set src=matrix.c jacobi.c main.c
 set obj=matrix.o jacobi.o main.o
-set opt1= -static -std=gnu11 -lm -W -Wall
+set opt1= -static -std=gnu11 -O3 -lm -W -Wall
 set gcc="c:\mingw\bin\gcc.exe"
 set prog=rotjacobi.exe
 if "%1"=="clean" goto clean
