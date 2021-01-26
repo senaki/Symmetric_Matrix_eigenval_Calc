@@ -27,27 +27,26 @@ int main(int argc, char *argv[])
 		goto exit_failure ;
 	}
 
+	int status;
 	FILE *fidFLAG;//Pour afficher une seule fois le message d'accueil
-	static unsigned int FLAG;
-	if ( (fidFLAG=fopen("flag","r")) != NULL ){
-		fscanf(fidFLAG,"%u",&FLAG);
+	static unsigned int FLAG=0;
+	if ( (fidFLAG=fopen("flag","r")) == NULL ){
+		
+		welcom_msg( msg );//Message d'accueil
+		fidFLAG=fopen("flag", "w");
+		fprintf(fidFLAG,"%u",1);
+		fclose(fidFLAG);
 	}
 	else {
-		FLAG=0	;
-		fidFLAG=fopen("flag", "w");
+		status=fscanf(fidFLAG,"%u",&FLAG);
+		FLAG++;
+		fprintf(fidFLAG,"%u", FLAG);
+		fclose(fidFLAG);
 	}
 
  //-------
 	unsigned int i, j, dim=2,//dimension de la matrice
 	Niteration=0 ;//Nombre d'itérations
-	int status;
-	//Message d'accueil
-	if(FLAG==0){
-		welcom_msg( msg );
-		FLAG++;
-		fprintf(fidFLAG,"%u", FLAG);
-	}
-	fclose(fidFLAG);
 	char //*inPath=dirname(argv[1]),
 	*inName=strdup(argv[1]),//duplique argv
 	*inFName=basename(inName),//extrait le nom de fichier

@@ -201,7 +201,7 @@ int IsOrtho(unsigned int n, double *in)
     ++i;
   }
   while( ceil(mout[i][i]) == 1 && i < n);
-  if( (unsigned int) abs(i) != n)
+  if( abs(i) != n)
   {
     printf("Not an orthogonal matrix");
     return -1;
