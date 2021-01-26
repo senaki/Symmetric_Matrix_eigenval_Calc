@@ -9,7 +9,7 @@ m BY THE JACOBI'S ROTATION in a n-dimensional vectorial space
 */
 unsigned int jacobi(double *M, unsigned int n, double *sp)
 {
-  unsigned int idx[2], i, j, Niteration ;
+  unsigned int idx[2]={0,1}, i, j, Niteration=0 ;
   //count=0;
   /*
   * idx receives the indexes of the maximal off-diagonal elementn is the size of
@@ -34,11 +34,11 @@ unsigned int jacobi(double *M, unsigned int n, double *sp)
   vP that which will receive the n eigenvalues
   */
   double theta ;
-  // printf("Loaded successfuly!\n");
-  //INITIAL MAX OFF-DIAGONAL ELEMENT CHOICE
+//INITIAL MAX OFF-DIAGONAL ELEMENT CHOICE
+/*
   idx[0]=0;
-  idx[1]=1;//
-  //        count=-1;//COUNTER OF THE NUMBER OF ITERATIONS SET TO -1
+  idx[1]=1;
+*/
   do
   {
     //BEGIN SEARCHING FOR THE MAX OUTSIDE THE DIAGONAL ELEMENT INDEXES IN ROW i
@@ -46,7 +46,7 @@ unsigned int jacobi(double *M, unsigned int n, double *sp)
     {
       for(j=i+1 ; j<n ; j++)
       {
-        if ( abs(mat[n*idx[0]+idx[1]]) < abs(mat[n*i+j]) )
+        if ( fabs(mat[n*idx[0]+idx[1]]) < fabs(mat[n*i+j]) )
         {
           idx[0]=i;
           idx[1]=j;
@@ -67,7 +67,7 @@ unsigned int jacobi(double *M, unsigned int n, double *sp)
       {
         for( j=0 ; j<n ; j++)
         {
-          mR[i][j] = (i==j) ? 1.0 : 0. ;//IDENTITY MATRICE, ALL ELEMENT OUTSIDE DIAGONAL ARE 0
+          mR[i][j] = (i==j) ? 1.0 : 0. ;
         }
       }
     }
@@ -76,29 +76,12 @@ unsigned int jacobi(double *M, unsigned int n, double *sp)
     mR[idx[1]][idx[0]] = -1*sin(theta) ;
     mR[idx[1]][idx[1]] = cos(theta);
     mR[idx[0]][idx[0]] = cos(theta) ;
-    //END OF CREATION
     //BEGIN ROTATION DE JACOBI
     transpose(n, n, &mR[0][0], &mTr[0][0]);//R^{1}->mTr
     Cross(n,n,n,n, &mTr[0][0], mat, &vP[0][0] );//mTr*b->vP
     Cross(n, n, n, n, &vP[0][0], &mR[0][0], mat );//vP*mR-> b
-    //END OF ROTATION
-    /**
-    //BEGIN PRECISION ASSESSMENT
-    double  pcsn=.0 ;
-    for( i=0; i<n; i++)
-    {
-      //pcsn += mat[n*i+i]*mat[n*i+i];
-            for(j=0; j<n; j++)
-              {
-                pcsn += ( i != j )? sqrt(mat[n*i+j]*mat[n*i+j]) : 0.0;
-              }
-    }
-    pcsn /= n*(n-1);
-    //END PRECISION ASSESSMENT
-    */
     Niteration++ ;
-    //pcsn /= Niteration;
-  } while(sqrt(max_mat*max_mat) > TOL);//OFFSET TO 0 EQUAL OR LOWER THAN tol
+  } while(fabs(max_mat) > TOL);
   //--END JACOBI
   for(i=0; i< n; i++){
     *(sp+i)= mat[i+n*i] ;
