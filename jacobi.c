@@ -9,7 +9,7 @@ m BY THE JACOBI'S ROTATION in a n-dimensional vectorial space
 */
 unsigned int jacobi(double *M, unsigned int n, double *sp)
 {
-  unsigned int idx[2]={0,1}, i, j, Niteration=0 ;
+  unsigned int idx[2], i, j, Niteration ;
   //count=0;
   /*
   * idx receives the indexes of the maximal off-diagonal elementn is the size of
@@ -36,9 +36,8 @@ unsigned int jacobi(double *M, unsigned int n, double *sp)
   double theta ;
   // printf("Loaded successfuly!\n");
   //INITIAL MAX OFF-DIAGONAL ELEMENT CHOICE
-/*  idx[0]=0;
-  idx[1]=1;
-*/
+  idx[0]=0;
+  idx[1]=1;//
   //        count=-1;//COUNTER OF THE NUMBER OF ITERATIONS SET TO -1
   do
   {
@@ -47,7 +46,7 @@ unsigned int jacobi(double *M, unsigned int n, double *sp)
     {
       for(j=i+1 ; j<n ; j++)
       {
-        if ( fabs(mat[n*idx[0]+idx[1]]) < fabs(mat[n*i+j]) )
+        if ( abs(mat[n*idx[0]+idx[1]]) < abs(mat[n*i+j]) )
         {
           idx[0]=i;
           idx[1]=j;
@@ -99,7 +98,7 @@ unsigned int jacobi(double *M, unsigned int n, double *sp)
     */
     Niteration++ ;
     //pcsn /= Niteration;
-  } while(fabs(max_mat) > TOL);//OFFSET TO 0 EQUAL OR LOWER THAN tol
+  } while(sqrt(max_mat*max_mat) > TOL);//OFFSET TO 0 EQUAL OR LOWER THAN tol
   //--END JACOBI
   for(i=0; i< n; i++){
     *(sp+i)= mat[i+n*i] ;
