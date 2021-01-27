@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
 	int status;
 	//Pour afficher une seule fois le message d'accueil
 	static unsigned int FLAG=0;
-	if ( (fidFLAG=fopen(".flag","r")) == NULL ){
-		fidFLAG=fopen(".flag", "w");
+	if ( (fidFLAG=fopen(".flag","r+")) == NULL ){
+		fidFLAG=fopen(".flag", "w+");
 		welcom_msg( msg );//Message d'accueil
 		FLAG++;
 		fprintf(fidFLAG,"%u", FLAG);
