@@ -8,30 +8,28 @@ int mat_write(unsigned int n,unsigned int m, double *a, char *file_name, char *m
   /**
   \brief Write a nxm matrix into a file \param filename
   \fn int mat_write(unsigned int n, unsigned int m, double *mat, char *filename, char *mode)
-  \param n {number of row}
-  \param m {number of column}
-  \param *mat {matrix reference}
-  \param *mode {string of characters defining output write mode (rwba ...)}
+  \param n
+    number of row
+  \param m
+    number of column
+  \param *mat
+    matrix reference
+  \param *mode
+    string of characters defining output write mode (rwba ...)}
   */
  FILE *fich= fopen(file_name, mode);
-  if (fich==NULL){
-    return -1;
-  }
+  if (fich==NULL) return -1 ;
   else {
     fprintf(fich, "Dim : %02u\t%02u\n", n, m);
-    for(unsigned int i=0; i< n; i++)
+    for(unsigned int i=0 ; i < n ; i++)
     {
-      for(unsigned int j=0; j<m; j++)
-      {
-        fprintf(fich, "%.3lf\t", *(a+ i*n + j));
-      }
-      fprintf(fich, "\n");
+      for( unsigned int j=0 ; j < m ; j++) fprintf(fich, "%10.6lf\t", *(a+ i*n + j)) ;
+      fprintf( fich, "\n") ;
     }
-    fclose(fich);
-    return 0;
+    fclose(fich) ;
+    return 0 ;
   }
 }
-///int mat_print(int nrow, double *in)
 
 int mat_print(unsigned int n,unsigned int m, double *in)
 {
@@ -45,10 +43,10 @@ int mat_print(unsigned int n,unsigned int m, double *in)
   unsigned int i,j;
   if(in != NULL){
     printf("\033[37m[");
-    for(i=0; i< n; i++)
+    for(i=0; i < n; i++)
     {
       printf("\n");
-      for( j=0;j< m; j++)
+      for( j=0 ; j< m ; j++ )
       printf("%8.3lf\t", *(in+i*n +j));
     }
     printf("\n]\033[0m\n");
@@ -97,32 +95,23 @@ int IsSym( unsigned int nrow, unsigned int ncol, double *in)
 {
   /**
   \brief Checks if the matrix in is symmetric
-    \fn IsSym(int nrow, int ncol, double *in)
-    \param nrow, ncol {number of row and column}
-    \return { 0 if success, otherwise -1}
+  \fn IsSym(int nrow, int ncol, double *in)
+  \param nrow, ncol {number of row and column}
+  \return { 0 if success, otherwise -1}
   */
-  unsigned int i, j=0, yes_or_no;
+  unsigned int i, j=0;
   if( (nrow != ncol) || in==NULL )
   {
     printf("\033[31mThe Matrix is not a square or is a NULL pointer\033[0m\n");
     return -1;
   }
-  else
-  {
-    for(i=0; i< nrow; i++)
+  for(i=0 ; i < nrow; i++){
+    for (j=i+1 ; j < ncol; j++)
     {
-      for(j=0; j!=i && j< ncol; j++)
-      {
-        yes_or_no= (*(in+j*ncol +i) != *(in+i*ncol+j));
-        if(yes_or_no != 0)
-        {
-          printf("Rem: Not a symmetric matrix\n");
-          return -1;
-        }
-      }
+      if( in[j*ncol +i] != in[i*ncol+j] ) return 0 ; //not symmetric
     }
-    return 0;
   }
+  return 1 ;
 }
 
 //--
@@ -211,4 +200,19 @@ int IsOrtho(unsigned int n, double *in)
     printf("Orthogonal matrix");
     return 0;
   }
+}
+double **mat_eye(unsigned int dim)
+{
+  /** \brief Return the square Identy matrix of dimension dim
+  \param dim : the dimension of the matrix
+  */
+  if (dim<2) return NULL;
+  static double **M;
+  M=malloc(dim*sizeof(double));
+  for(unsigned int i=0 ; i < dim ; i++)
+   {
+     M[i]=(double *)calloc(dim, sizeof(double));
+     M[i][i]=1.0;
+   }
+   return M;
 }

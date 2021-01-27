@@ -18,16 +18,21 @@ unsigned int jacobi(const double *M, unsigned int n, double *sp)
   idx[2] <=> column
   */
   double max_mat ;//threshold
-  /*matrixsquare_read(file_name,&n, m);//if we need to read from a file:\
+  /*
+  matrixsquare_read(file_name,&n, m);//if we need to read from a file:\
   Make a macro function for that purpose so it be possible to choose from either
-  passing a matrix variable or reading from a file stream.*/
-  double mR[n][n], mTr[n][n], vP[n][n], mat[n][n];
-  //(double *)malloc(n*n*sizeof(double));
-  for(i=0; i< n; i++)
+  passing a matrix variable or reading from a file stream.
+  */
+  double mR[n][n], mTr[n][n], vP[n][n], mat[n][n], bckup[4];
+  for( i=0 ; i < n; i++ )
   {
-    for(j=0; j < n; j++)
+    //As the matrix is symmetric
+    mat[i][i] = M[i*n+i] ;
+    mR[i][i]=1.0;
+    for( j=i+1 ; j < n ; j++ )
     {
-      mat[i][j]= M[i*n + j];
+      mat[i][j] = mat[j][i] = M[i*n + j] ;
+      mR[j][i] = mR[i][j]=0.;
     }
   }
   /*mR is the matrix of rotation
@@ -35,14 +40,8 @@ unsigned int jacobi(const double *M, unsigned int n, double *sp)
   vP that which will receive the n eigenvalues
   */
   double theta ;
-//INITIAL MAX OFF-DIAGONAL ELEMENT CHOICE
-/*
-  idx[0]=0;
-  idx[1]=1;
-*/
   do
   {
-    //BEGIN SEARCHING FOR THE MAX OUTSIDE THE DIAGONAL ELEMENT INDEXES IN ROW i
     for(i=0 ; i< n ; i++)
     {
       for(j=i+1 ; j<n ; j++)
@@ -54,6 +53,11 @@ unsigned int jacobi(const double *M, unsigned int n, double *sp)
         }
       }
     }
+    //backup
+    bckup[0]=mR[idx[0]][idx[0]];
+    bckup[1]=mR[idx[0]][idx[1]];
+    bckup[2]=mR[idx[1]][idx[0]];
+    bckup[3]=mR[idx[1]][idx[1]];
     //END SEACHING FOR THE LARGEST OFF-DIAGONAL ELEMENT
     max_mat=mat[idx[0]][idx[1]];
     //BEGIN SETTING ROTATION ANGLE
@@ -61,27 +65,20 @@ unsigned int jacobi(const double *M, unsigned int n, double *sp)
     theta /= (mat[idx[1]][idx[1]] - mat[idx[0]][idx[0]]) ;
     theta = 0.5*atan( theta ) ;
     //END SETTING ROTATION ANGLE
-    //BEGIN CREATION OF THE ROTATION MATRIX
-    if(n > 2)
-    {//FIRST
-      for( i=0 ; i<n ; i++)
-      {
-        for( j=0 ; j<n ; j++)
-        {
-          mR[i][j] = (i==j) ? 1.0 : 0. ;
-        }
-      }
-    }
-    //SECONDLY
+//ici etait mR
+    mR[idx[0]][idx[0]] = cos(theta) ;
     mR[idx[0]][idx[1]] = sin(theta) ;
     mR[idx[1]][idx[0]] = -1*sin(theta) ;
     mR[idx[1]][idx[1]] = cos(theta);
-    mR[idx[0]][idx[0]] = cos(theta) ;
     //BEGIN ROTATION DE JACOBI
     transpose(n, n, &mR[0][0], &mTr[0][0]);//R^{1}->mTr
-    Cross(n,n,n,n, &mTr[0][0], &mat[0][0], &vP[0][0] );//mTr*b->vP
-    Cross(n, n, n, n, &vP[0][0], &mR[0][0], &mat[0][0]);//vP*mR-> b
+    Cross(n, n, n, n, &mTr[0][0], &mat[0][0], &vP[0][0] );//mTr*b->vP
+    Cross(n, n, n, n, &vP[0][0], &mR[0][0], &mat[0][0] );//vP*mR-> b
     Niteration++ ;
+    mR[idx[0]][idx[0]]=bckup[0];
+    mR[idx[0]][idx[1]]=bckup[1];
+    mR[idx[1]][idx[0]]=bckup[2];
+    mR[idx[1]][idx[1]]=bckup[3];
   } while(fabs(max_mat) > TOL);
   //--END JACOBI
   for(i=0; i< n; i++){
@@ -89,6 +86,5 @@ unsigned int jacobi(const double *M, unsigned int n, double *sp)
   }
   //Créer plus tard une structure pour cette sortie
   //printf("Tolerance\tIteration\t|Precision|\tmax(Mat)\n%9.3g\t%9.3d\t%9.3g\t%8.3g\n", TOL,Niteration,pcsn, max_mat);
-  free(mat);
   return Niteration ;
 }
