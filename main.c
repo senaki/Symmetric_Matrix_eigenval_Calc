@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 {
 	//Verification des paramètres d'entrée
 	if ( (argc==1) || (argc==2) ){
-		printf("\033[31m %d argument :\n\tArg 1 : input file name;"
+		fprintf(stderr, "\033[31m %d argument :\n\tArg 1 : input file name;"
 		"\n\tArg 2: output file name\nEnter output path name.\033[0m\n", argc-1);
 		goto exit_failure ;
 	}
@@ -47,7 +47,8 @@ int main(int argc, char *argv[])
 	char *inName=strdup(argv[1]),//duplique argv
 	*inFName=basename(inName), //extrait le nom de fichier
 	*outName=strdup(argv[2]);
-	outName=strcat(outName,"eig_"), outName=strcat(outName,inFName); //nom du fichier de sortie
+	//nom du fichier de sortie
+	outName=strcat(outName,"eig_"), outName=strcat(outName,inFName);
 	printf("\033[31mProcessing : %s\t===>\t%s\033[0m\n", inFName, outName);
 	double *M=NULL,	*spc=NULL; //Matrice lire et spectre des valeurs propres
 	FILE *fout ;//spectre
@@ -62,29 +63,22 @@ int main(int argc, char *argv[])
 	}
 	if ( IsSym(dim, dim, M) != 1 )
 	{
-		printf("This matrix is not symmetric\n");
+		fputs("This matrix is not symmetric", stderr);
 		goto exit_failure ;
 	}
 	/**
 	* spc := vecteur des valeurs propres
 	*/
-	spc = realloc(spc, dim*sizeof( double ) ) ;
+	spc = realloc(spc, dim*sizeof( double )) ;
 	/**
 	* Rotation de Jacobi avec J(M, dim, spc)
 	*/
 	Niteration=jacobi(M, dim, spc) ;
 	fout = fopen(outName, "w");
-	/**
-	* Write dim and Niteration
-	*/
-	fprintf( fout, "#%03d\t%03d\n", dim, Niteration ) ;
-	for( j=0 ; j < dim ; j++ )
-	{
-		fprintf( fout, "%010.6lf\n", *( spc + j ) );
-	}
-	fprintf(fout, "\n") ;
-	free(spc) ; free(M) ;
+	fprintf( fout, "# total iteration : %03d\n", Niteration ) ;
+	mat_write(1,dim, spc, fout);
 	fclose(fout) ;
+	free(spc) ; free(M) ;
 	goto exit_success;
 	exit_success: return EXIT_SUCCESS;
 	exit_failure: return EXIT_FAILURE ;

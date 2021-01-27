@@ -3,7 +3,7 @@
 Write an ascii square matrix
 */
 ///int mat_write(char *file_name, int n, double *a )
-int mat_write(unsigned int n,unsigned int m, const double *a, const char *file_name, const char *mode )
+int mat_write(unsigned int n,unsigned int m, const double *a, FILE* stream )
 {
   /**
   \brief Write a nxm matrix into a file \param filename
@@ -17,42 +17,40 @@ int mat_write(unsigned int n,unsigned int m, const double *a, const char *file_n
   \param *mode
     string of characters defining output write mode (rwba ...)}
   */
- FILE *fich= fopen(file_name, mode);
-  if (fich==NULL) return -1 ;
-  else {
-    fprintf(fich, "Dim : %02u\t%02u\n", n, m);
-    for(unsigned int i=0 ; i < n ; i++)
-    {
-      for( unsigned int j=0 ; j < m ; j++) fprintf(fich, "%10.6lf\t", *(a+ i*n + j)) ;
-      fprintf( fich, "\n") ;
+	//FILE *fich= fopen(file_name, mode);
+	if (stream==NULL) return -1 ;
+	fprintf(stream, "# matrix size : %u x %u\n", n, m);
+   	for(unsigned int i=0 ; i < n ; i++){
+			for( unsigned int j=0 ; j < m ; j++) {
+				fprintf(stream, "%07.4lf%c", a[i*n + j], (n==1 || m==1)? '\n':'\t') ;
+			}
+			if (i<n-1) fputc('\n', stream );
     }
-    fclose(fich) ;
-    return 0 ;
-  }
+		return 0 ;
 }
 
 int mat_print(unsigned int n,unsigned int m, const double *in)
 {
-  /**
-  \brief Prints a nrow-by-nrow matrix to the screen
-  \fn int mat_print(unsigned int n, unsigned int m, const double *mat)
-  \param n {number of row}
-  \param m {number of column}
-  \param *mat {matrix reference}
-  */
-  unsigned int i,j;
-  if(in != NULL){
-    printf("\033[37m[");
-    for(i=0; i < n; i++)
-    {
-      printf("\n");
-      for( j=0 ; j< m ; j++ )
-      printf("%8.3lf\t", *(in+i*n +j));
-    }
-    printf("\n]\033[0m\n");
-    return 0;
-  }
-  else return -1;
+	/**
+	\brief Prints a nrow-by-nrow matrix to the screen
+	\fn int mat_print(unsigned int n, unsigned int m, const double *mat)
+	\param n {number of row}
+	\param m {number of column}
+	\param *mat {matrix reference}
+	*/
+	unsigned int i,j;
+	if(in == NULL){
+		fputs("You provided a null pointer", stderr);
+		return -1;
+	}
+	puts("\033[37m[");
+	for(i=0; i < n; i++)
+	{
+		for( j=0 ; j< m ; j++ )  printf("%07.4lf\t", in[i*n +j]);
+		putchar('\n') ;
+	}
+	puts("]\033[0m");
+	return 0;
 }
 
 int IsSym( unsigned int nrow, unsigned int ncol, const double *in)

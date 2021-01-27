@@ -11,7 +11,7 @@
 #include <libgen.h>
 extern char *strdup(const char *);
 extern int mat_print(unsigned int n,unsigned int m, const double *in);//from an array
-extern int mat_write( unsigned int n,unsigned int m, const  double *a, const char *file_name, const char *mode );//from a file
+extern int mat_write( unsigned int n,unsigned int m, const  double *a, FILE *stream );//from a file
 //--
 extern unsigned int jacobi(const double *m, unsigned int n, double *spectre);
 extern int IsSym( unsigned int nrow, unsigned int ncol, const double *in);//Check if the matrix is symmetric
