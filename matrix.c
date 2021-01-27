@@ -116,7 +116,7 @@ int IsSym( unsigned int nrow, unsigned int ncol, double *in)
 
 //--
 //--
-void mat_sum(unsigned int n, double *a, double *b, double *out)
+void mat_sum(unsigned int n, const double *a, const double *b, double *out)
 {
   /**
   \brief Sum two square matrices a and b and write the output into out matrix.
@@ -126,12 +126,12 @@ void mat_sum(unsigned int n, double *a, double *b, double *out)
   unsigned int i, j;
   for( i=0; i< n; i++)
   {
-    for(j=0; j<n; j++) *(out + i*n + j) = (double) *(a + i*n + j)+*(b + i*n + j);
+    for(j=0; j<n; j++) out[i*n + j] = a[i*n + j]+b[i*n + j];
   }
 }
 //--
 //--
-void transpose(unsigned int nrow, unsigned int ncol, double *A, double *out)
+void transpose(unsigned int nrow, unsigned int ncol, const double *A, double *out)
 {
   /**
   \fn Transpose(int nrow, int ncol, double *A, double *out)
