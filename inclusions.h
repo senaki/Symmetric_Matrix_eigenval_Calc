@@ -10,14 +10,14 @@
 #include <string.h>
 #include <libgen.h>
 extern char *strdup(const char *);
-extern int mat_print(unsigned int n,unsigned int m, double *in);//from an array
-extern int mat_write( unsigned int n,unsigned int m, double *a, char *file_name, char *mode );//from a file
+extern int mat_print(unsigned int n,unsigned int m, const double *in);//from an array
+extern int mat_write( unsigned int n,unsigned int m, const  double *a, const char *file_name, const char *mode );//from a file
 //--
 extern unsigned int jacobi(const double *m, unsigned int n, double *spectre);
-extern int IsSym( unsigned int nrow, unsigned int ncol, double *in);//Check if the matrix is symmetric
-extern int IsOrtho(unsigned int n, double *in);
+extern int IsSym( unsigned int nrow, unsigned int ncol, const double *in);//Check if the matrix is symmetric
+extern int IsOrtho(unsigned int n, const double *in);
 extern void transpose(unsigned int nrow, unsigned int ncol, const double *A, double *out);
-extern void Cross(unsigned int a_nrow, unsigned int b_nrow, unsigned int a_ncol,unsigned int b_ncol, double *A, double *B, double *C);//matricial product
+extern void Cross(unsigned int a_nrow, unsigned int b_nrow, unsigned int a_ncol, unsigned int b_ncol, const double* restrict A, const double* restrict B, double* restrict C);//matricial product
 extern void mat_sum(unsigned int n, const double *a, const double *b, double *out); //matrix sum
 extern double **mat_eye(unsigned int dim) ;
 #endif //INCLUSIONS_H_INCLUDED
