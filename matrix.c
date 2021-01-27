@@ -3,11 +3,11 @@
 Write an ascii square matrix
 */
 ///int mat_write(char *file_name, int n, double *a )
-int mat_write(unsigned int n,unsigned int m, double *a, char *file_name, char *mode )
+int mat_write(unsigned int n,unsigned int m, const double *a, const char *file_name, const char *mode )
 {
   /**
   \brief Write a nxm matrix into a file \param filename
-  \fn int mat_write(unsigned int n, unsigned int m, double *mat, char *filename, char *mode)
+  \fn int mat_write(unsigned int n, unsigned int m, const double *mat, const char *filename, const char *mode)
   \param n
     number of row
   \param m
@@ -31,11 +31,11 @@ int mat_write(unsigned int n,unsigned int m, double *a, char *file_name, char *m
   }
 }
 
-int mat_print(unsigned int n,unsigned int m, double *in)
+int mat_print(unsigned int n,unsigned int m, const double *in)
 {
   /**
   \brief Prints a nrow-by-nrow matrix to the screen
-  \fn int mat_print(unsigned int n, unsigned int m, double *mat)
+  \fn int mat_print(unsigned int n, unsigned int m, const double *mat)
   \param n {number of row}
   \param m {number of column}
   \param *mat {matrix reference}
@@ -54,44 +54,8 @@ int mat_print(unsigned int n,unsigned int m, double *in)
   }
   else return -1;
 }
-//--
-//--
-///double *matrixsquare_read(char *path, int *n)
-/**
-Read a square matrix at path and put the dimension in n and put it in q
-the format read is:
-n
-a11	... a1n
-.
-.
-.
-an1   ... ann
-*/
-/*
-double *matrixsquare_read(char *path, unsigned int *n)
-{
-static double *mat ;
-unsigned int i, j, dim;
-FILE *flux= fopen( path, "r");
-fscanf( flux, "%i", &dim);
-*n=dim ;
-printf("%i\n",dim);
-mat = (double *) calloc(dim*dim, sizeof(double));
-printf("MAT(%i,%i)\n",dim,dim );
-for(i=0; i< dim; i++)
-{
-for(j=0; j<dim; j++)
-{
-fscanf(flux, "%lf\t",(mat + i*dim +j));
-printf("%lf\t",*(mat + i*dim +j) );
-}
-printf("\n");
-}
-fclose(flux);
-return mat;
-}
-*/
-int IsSym( unsigned int nrow, unsigned int ncol, double *in)
+
+int IsSym( unsigned int nrow, unsigned int ncol, const double *in)
 {
   /**
   \brief Checks if the matrix in is symmetric
@@ -146,60 +110,60 @@ void transpose(unsigned int nrow, unsigned int ncol, const double *A, double *ou
 }
 //--
 //--
-void Cross(unsigned int a_nrow, unsigned int b_nrow, unsigned int a_ncol,unsigned int b_ncol, double *A, double *B, double *C)
+void Cross(unsigned int a_nrow,
+  unsigned int b_nrow,
+  unsigned int a_ncol,
+  unsigned int b_ncol,
+  const double * restrict A,
+  const double * restrict B,
+  double * restrict C)
 {
   /**
-  \fn void Cross(int a_nrow, int b_nrow, int a_ncol,int b_ncol, double *A, double *B, double *C)
+  \fn void Cross(int a_nrow, int b_nrow, int a_ncol,int b_ncol,
+  const double * restrict A, const double * restrict B, double * restrict C)
   \brief Calculate the cross product of the A by B and put the result into C.
   Their dimension must agree.
   */
   unsigned int i,j,k;
-  if(b_nrow != a_ncol)
-  {
-    printf("\nDimension error!\n");
-  }
-  else
+  if(b_nrow == a_ncol)
   {
     for(i=0; i< a_nrow; i++)
     {
       for(j=0; j< b_ncol; j++)
       {
-        *(C+ i*b_ncol+j)=0.;
-        for(k=0; k< a_ncol; k++)
-        *(C+i*b_ncol+j) += (double) *(A+i*a_ncol+k)*(*(B+ k*b_ncol+j));
+        C[i*b_ncol+j]=A[i*a_ncol+0]*B[0+j];
+        for(k=1; k < a_ncol; k++)
+        C[i*b_ncol+j] += A[i*a_ncol+k]*B[k*b_ncol+j];
       }
     }
   }
 }
 //--
 //--
-int IsOrtho(unsigned int n, double *in)
+int IsOrtho(unsigned int n, const double *in)
 {
-  /**\fn int IsOrtho(int nrow, int ncol, double *in)
+  /**\fn int IsOrtho(int nrow, int ncol, const double *in)
   * \brief Check if the matrix in is orthogonal
   */
-  unsigned int i;
+  unsigned int i=0;
   double m1[n][n], mout[n][n];//m1 receive the transpose of in, mout receive the cross matrix product of m1 and in
   transpose(n, n, in, &m1[0][0]);
   Cross(n,n,n,n, &m1[0][0], in, &mout[0][0]);
-  //--
-  //--
-  i=0;
   do
   {
     ++i;
   }
-  while( ceil(mout[i][i]) == 1 && i < n);
-  if( (unsigned int) abs(i) != n)
-  {
-    printf("Not an orthogonal matrix");
+  while( fabs(ceil(mout[i][i]))==1 && (i < n) );
+  return (i == n) ? 1 : 0 ;
+  /*{
+    puts("Not an orthogonal matrix");
     return -1;
   }
   else
   {
-    printf("Orthogonal matrix");
+    puts("Orthogonal matrix");
     return 0;
-  }
+  }*/
 }
 double **mat_eye(unsigned int dim)
 {
