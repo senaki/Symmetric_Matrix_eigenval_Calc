@@ -43,13 +43,13 @@ int mat_print(unsigned int n,unsigned int m, const double *in)
 		fputs("You provided a null pointer", stderr);
 		return -1;
 	}
-	puts("\033[37m[");
+	puts("[");
 	for(i=0; i < n; i++)
 	{
-		for( j=0 ; j< m ; j++ )  printf("%07.4lf\t", in[i*n +j]);
+		for( j=0 ; j< m ; j++ )  printf("%.4lf\t", in[i*n +j]);
 		putchar('\n') ;
 	}
-	puts("]\033[0m");
+	puts("]");
 	return 0;
 }
 
@@ -64,11 +64,11 @@ int IsSym( unsigned int nrow, unsigned int ncol, const double *in)
   unsigned int i, j=0;
   if( (nrow != ncol) || in==NULL )
   {
-    printf("\033[31mThe Matrix is not a square or is a NULL pointer\033[0m\n");
+    fputs("\033[31mThe Matrix is not a square or is a NULL pointer\033[0m", stderr);
     return -1;
   }
   for(i=0 ; i < nrow; i++){
-    for (j=i+1 ; j < ncol; j++)
+    for (j=ncol-1 ; j>i; j--)
     {
       if( in[j*ncol +i] != in[i*ncol+j] ) return 0 ; //not symmetric
     }
@@ -163,18 +163,17 @@ int IsOrtho(unsigned int n, const double *in)
     return 0;
   }*/
 }
-double **mat_eye(unsigned int dim)
+double *mat_eye(const unsigned int dim)
 {
   /** \brief Return the square Identy matrix of dimension dim
   \param dim : the dimension of the matrix
   */
   if (dim<2) return NULL;
-  static double **M;
-  M=malloc(dim*sizeof(double));
+  static double (*M)[dim];
+  M=(double (*)[dim]) calloc(dim*dim, sizeof(double));
   for(unsigned int i=0 ; i < dim ; i++)
    {
-     M[i]=(double *)calloc(dim, sizeof(double));
      M[i][i]=1.0;
    }
-   return M;
+   return &M[0][0];
 }

@@ -19,5 +19,5 @@ extern int IsOrtho(unsigned int n, const double *in);
 extern void transpose(unsigned int nrow, unsigned int ncol, const double *A, double *out);
 extern void Cross(unsigned int a_nrow, unsigned int b_nrow, unsigned int a_ncol, unsigned int b_ncol, const double* restrict A, const double* restrict B, double* restrict C);//matricial product
 extern void mat_sum(unsigned int n, const double *a, const double *b, double *out); //matrix sum
-extern double **mat_eye(unsigned int dim) ;
+extern double *mat_eye(const unsigned int dim) ;
 #endif //INCLUSIONS_H_INCLUDED
