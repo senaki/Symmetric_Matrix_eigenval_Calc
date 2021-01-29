@@ -100,15 +100,13 @@ void transpose(unsigned int nrow, unsigned int ncol, const double *A, double *ou
   \brief Calculates the transpose of a nrow-by-ncol matrix A and put it in the matrix ncol-by-nrow
   A and out must be declared agree with the the dimension
   */
-  unsigned int i, j;
-  for(i=0; i<nrow; i++)
+  for(unsigned int i=0; i<nrow; i++)
   {
-    for(j=0; j<ncol; j++) *(out+ j*nrow +i)=*(A +i*ncol +j);
+    for(unsigned int j=0; j<ncol; j++) *(out+ j*nrow +i)=*(A +i*ncol +j);
   }
 }
-//--
-//--
-void Cross(unsigned int a_nrow,
+
+inline void Cross(unsigned int a_nrow,
   unsigned int b_nrow,
   unsigned int a_ncol,
   unsigned int b_ncol,
@@ -136,34 +134,24 @@ void Cross(unsigned int a_nrow,
     }
   }
 }
-//--
-//--
+
 int IsOrtho(unsigned int n, const double *in)
 {
   /**\fn int IsOrtho(int nrow, int ncol, const double *in)
   * \brief Check if the matrix in is orthogonal
   */
-  unsigned int i=0;
-  double m1[n][n], mout[n][n];//m1 receive the transpose of in, mout receive the cross matrix product of m1 and in
+  double m1[n][n], mout[n][n];
   transpose(n, n, in, &m1[0][0]);
   Cross(n,n,n,n, &m1[0][0], in, &mout[0][0]);
+  unsigned int i=0;
   do
   {
     ++i;
   }
   while( fabs(ceil(mout[i][i]))==1 && (i < n) );
   return (i == n) ? 1 : 0 ;
-  /*{
-    puts("Not an orthogonal matrix");
-    return -1;
-  }
-  else
-  {
-    puts("Orthogonal matrix");
-    return 0;
-  }*/
 }
-double *mat_eye(const unsigned int dim)
+double (*mat_eye(const unsigned int dim))[]
 {
   /** \brief Return the square Identy matrix of dimension dim
   \param dim : the dimension of the matrix
@@ -175,5 +163,5 @@ double *mat_eye(const unsigned int dim)
    {
      M[i][i]=1.0;
    }
-   return &M[0][0];
+   return M;
 }

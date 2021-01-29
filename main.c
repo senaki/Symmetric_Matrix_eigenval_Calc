@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	if ( (argc==1) || (argc==2) ){
 		fprintf(stderr, "\033[31m %d argument :\n\tArg 1 : input file name;"
 		"\n\tArg 2: output file name\nEnter output path name.\033[0m\n", argc-1);
-		goto exit_failure ;
+		exit(EXIT_FAILURE);
 	}
 
 	FILE *fidFLAG;
@@ -50,21 +50,22 @@ int main(int argc, char *argv[])
 	//nom du fichier de sortie
 	outName=strcat(outName,"eig_"), outName=strcat(outName,inFName);
 	printf("\033[31mProcessing : %s\t===>\t%s\033[0m\n", inFName, outName);
-	double *M=NULL,	*spc=NULL; //Matrice lire et spectre des valeurs propres
+	double	*spc=NULL; //Matrice lire et spectre des valeurs propres
 	FILE *fout ;//spectre
 	//-------------------------------
 	FILE *flux = fopen( argv[1], "r" );
 	status=fscanf( flux, "%u\n", &dim ) ;
-	M = (double *) malloc ( dim*dim*sizeof(double) ) ;
+	double (*M)[dim];
+	M = (double (*)[dim]) calloc( dim*dim, sizeof(double) ) ;
 	for ( i=0 ; i < dim ; i++ ){
 		for( j=0 ; j < dim ; j++ ){
-			status+=fscanf( flux, "%lf", (M + i*dim + j) ) ;
+			status+=fscanf( flux, "%lf", &M[i][j] ) ;
 		}
 	}
-	if ( IsSym(dim, dim, M) != 1 )
+	if ( IsSym(dim, dim, &M[0][0]) != 1 )
 	{
 		fputs("This matrix is not symmetric", stderr);
-		goto exit_failure ;
+		exit(EXIT_FAILURE) ;
 	}
 	/**
 	* spc := vecteur des valeurs propres
@@ -73,13 +74,11 @@ int main(int argc, char *argv[])
 	/**
 	* Rotation de Jacobi avec J(M, dim, spc)
 	*/
-	Niteration=jacobi(M, dim, spc) ;
+	Niteration=jacobi(&M[0][0], dim, spc) ;
 	fout = fopen(outName, "w");
 	fprintf( fout, "# total iteration : %03d\n", Niteration ) ;
 	mat_write(1,dim, spc, fout);
 	fclose(fout) ;
 	free(spc) ; free(M) ;
-	goto exit_success;
-	exit_success: return EXIT_SUCCESS;
-	exit_failure: return EXIT_FAILURE ;
+	return EXIT_SUCCESS;
 }
