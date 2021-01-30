@@ -17,7 +17,7 @@ The following lines contain the matrix elements separeted by a blank (white spac
 The matrix row ends with a newline character.
 ### Example of input file
 
-| 4     |       |
+| 2     |       |
 | :---- | ----: |
 | 1     | -2    |
 | -2    | 0.0   |
