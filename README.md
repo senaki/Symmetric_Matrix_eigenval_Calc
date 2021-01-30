@@ -41,18 +41,10 @@ where y_n is the n-th eigenvalue.
 The second line gives the column matrix containing the eigenvalues.
 
 ## Source structure
-* __main.c__
-        * main program
-* __matrix.c__
-        * function declaration for matrix manipulation
-* __jacobi.c__
-
-        * implements Jacobi's rotation
-* __inclusion.h__
-        * declares functions' prototypes
-* __Makefile__
-        * Makefile to compile the source code
-* __make.bat__
-        * batch scrip to compile source code on Windows
-* __test.dat__
-        * test input file
+* __main.c__ : main program
+* __matrix.c__ : function declaration for matrix manipulation
+* __jacobi.c__ : implements Jacobi's rotation
+* __inclusion.h__ : declares functions' prototypes
+* __Makefile__ : Makefile to compile the source code
+* __make.bat__ : batch scrip to compile source code on Windows
+* __test.dat__: test input file
