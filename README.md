@@ -1,10 +1,15 @@
 # Symmetric matrix eigenvalue calculation with Jacobi's methods.
 
 Implementation of eigenvalue calculation of symmetric matrices with Jacobi's method.
-* Matrix is read from an input file *filename.dat*
-* Eigenvalues are written into file *eig_filename.dat*
+* Matrix is read from an input file *inputfile.dat*
+* Eigenvalues are written into file *eig_inputfile.dat*
 
 It is an old MSc project, reshashed and optimized.
+
+## Running code
+`rotjacobi /path/to/inputfile.dat /path/to/store/output/`
+
+Example :  `rotjacobi ./test.dat ./`
 
 ## Input file structure
 The first line contains the matrix dimension *n*.
