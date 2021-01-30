@@ -53,7 +53,7 @@ int mat_print(unsigned int n,unsigned int m, const double *in)
 	return 0;
 }
 
-int IsSym( unsigned int nrow, unsigned int ncol, const double *in)
+int IsSym( unsigned int n, const double *in)
 {
   /**
   \brief Checks if the matrix in is symmetric
@@ -62,15 +62,15 @@ int IsSym( unsigned int nrow, unsigned int ncol, const double *in)
   \return { 0 if success, otherwise -1}
   */
   unsigned int i, j=0;
-  if( (nrow != ncol) || in==NULL )
+  if( in==NULL )
   {
     fputs("\033[31mThe Matrix is not a square or is a NULL pointer\033[0m", stderr);
     return -1;
   }
-  for(i=0 ; i < nrow; i++){
-    for (j=ncol-1 ; j>i; j--)
+  for(i=0 ; i < n; i++){
+    for (j=n-1 ; j>i; j--)
     {
-      if( in[j*ncol +i] != in[i*ncol+j] ) return 0 ; //not symmetric
+      if( in[j*n +i] != in[i*n+j] ) return 0 ; //not symmetric
     }
   }
   return 1 ;
@@ -83,7 +83,7 @@ void mat_sum(unsigned int n, const double *a, const double *b, double *out)
   /**
   \brief Sum two square matrices a and b and write the output into out matrix.
   \fn void mat_sum(int n, double *a, double *b, double *out)
-  \param n {matrix dimension}
+  \param n matrix dimension
   */
   unsigned int i, j;
   for( i=0; i< n; i++)
@@ -148,7 +148,7 @@ int IsOrtho(unsigned int n, const double *in)
   {
     ++i;
   }
-  while( fabs(ceil(mout[i][i]))==1 && (i < n) );
+  while( i < n );
   return (i == n) ? 1 : 0 ;
 }
 double (*mat_eye(const unsigned int dim))[]

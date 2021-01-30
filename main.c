@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 			status+=fscanf( flux, "%lf", &M[i][j] ) ;
 		}
 	}
-	if ( IsSym(dim, dim, &M[0][0]) != 1 )
+	if ( IsSym(dim, &M[0][0]) != 1 )
 	{
 		fputs("This matrix is not symmetric", stderr);
 		exit(EXIT_FAILURE) ;

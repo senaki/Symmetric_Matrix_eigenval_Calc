@@ -16,7 +16,7 @@ extern int mat_print(unsigned int n,unsigned int m, const double *in);
 extern int mat_write( unsigned int n,unsigned int m, const  double *a, FILE *stream );
 //--
 extern unsigned int jacobi(const double *m, unsigned int n, double *spectre);
-extern int IsSym( unsigned int nrow, unsigned int ncol, const double *in);//Check if the matrix is symmetric
+extern int IsSym( unsigned int n, const double *in);//Check if the matrix is symmetric
 extern int IsOrtho(unsigned int n, const double *in);
 extern void transpose(unsigned int nrow, unsigned int ncol, const double *A, double *out);
 extern void Cross(unsigned int a_nrow, unsigned int b_nrow, unsigned int a_ncol, unsigned int b_ncol, const double* restrict A, const double* restrict B, double* restrict C);//matricial product
