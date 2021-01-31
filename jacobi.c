@@ -7,7 +7,7 @@ m BY THE JACOBI'S ROTATION in a n-dimensional vectorial space
 * \param n dimension of the square matrix
 * \param p Matrix reference
 */
-unsigned int jacobi(const double *M, unsigned int n, double *sp)
+unsigned int jacobi(unsigned int n, const double *M, double *sp)
 {
   unsigned int idx[2]={0,1}, i, j, Niteration=0 ;
   /*
@@ -16,7 +16,7 @@ unsigned int jacobi(const double *M, unsigned int n, double *sp)
   idx[1] <=> line
   idx[2] <=> column
   */
-  double max_mat, (*mR)[n]=mat_eye(n), mTr[n][n], vP[n][n], mat[n][n], bckup[4];
+  double theta=.0, max_mat, (*mR)[n]=mat_eye(n), mTr[n][n], vP[n][n], mat[n][n];
   for( i=0 ; i < n; i++ )
   {
     mat[i][i] = M[i*n+i] ;
@@ -30,9 +30,13 @@ unsigned int jacobi(const double *M, unsigned int n, double *sp)
   mTr its transposition and
   vP that which will receive the n eigenvalues
   */
-  double theta ;
   do
   {
+    // Re-initialize rotation matrix
+    mR[idx[0]][idx[0]]=1;
+    mR[idx[1]][idx[1]]=1;
+    mR[idx[0]][idx[1]]=0;
+    mR[idx[1]][idx[0]]=0;
     for(i=0 ; i < n ; i++)
     {
       for(j=i+1 ; j <n ; j++)
@@ -44,37 +48,28 @@ unsigned int jacobi(const double *M, unsigned int n, double *sp)
         }
       }
     }
-    max_mat=mat[idx[0]][idx[1]];
-    //backup
-    bckup[0]=mR[idx[0]][idx[0]];
-    bckup[1]=mR[idx[0]][idx[1]];
-    bckup[2]=mR[idx[1]][idx[0]];
-    bckup[3]=mR[idx[1]][idx[1]];
-    //BEGIN SETTING ROTATION ANGLE
+    max_mat=fabs(mat[idx[0]][idx[1]]);
+    // Determinaton of rotation angle theta
     theta = 2.*mat[idx[0]][idx[1]] ;
     theta /= (mat[idx[1]][idx[1]] - mat[idx[0]][idx[0]]) ;
     theta = 0.5*atan( theta ) ;
-    //END SETTING ROTATION ANGLE
+    //----------------------------------------------------
     mR[idx[0]][idx[0]] = cos(theta) ;
+    mR[idx[1]][idx[1]] = cos(theta);
     mR[idx[0]][idx[1]] = sin(theta) ;
     mR[idx[1]][idx[0]] = -1*sin(theta) ;
-    mR[idx[1]][idx[1]] = cos(theta);
-    //BEGIN ROTATION DE JACOBI
-    //R^{1}->mTr
+    // Transpose mR -> mTr
     transpose(n, n, &mR[0][0], &mTr[0][0]);
-    //mTr*b->vP
+    // Left Multiply mTr by mat -> vP
     Cross(n, n, n, n, &mTr[0][0], &mat[0][0], &vP[0][0] );
-    //vP*mR-> b
+    // Right Multply vP by mR -> mat
     Cross(n, n, n, n, &vP[0][0], &mR[0][0], &mat[0][0] );
     Niteration++ ;
-    mR[idx[0]][idx[0]]=bckup[0];
-    mR[idx[0]][idx[1]]=bckup[1];
-    mR[idx[1]][idx[0]]=bckup[2];
-    mR[idx[1]][idx[1]]=bckup[3];
-  } while(fabs(max_mat) > TOL);
+  } while( max_mat > TOL);
   //--END JACOBI
-  for(i=0; i< n; i++){
+  for(i=0; i < n; i++){
     sp[i]= mat[i][i] ;
   }
+  free(mR);
   return Niteration ;
 }

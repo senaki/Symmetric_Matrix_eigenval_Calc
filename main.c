@@ -42,15 +42,21 @@ int main(int argc, char *argv[])
 	}
 	unsigned int i, j, dim=2,//dimension de la matrice
 	Niteration=0 ;//Nombre d'itérations
-	char *inName=strdup(argv[1]),//duplique argv
-	*inFName=basename(inName), //extrait le nom de fichier
-	*outName=strdup(argv[2]);//nom du fichier de sortie
-	outName=strcat(outName,"eig_"), outName=strcat(outName,inFName);
+	char *inputFName=strdup(argv[1]),//duplique argv
+	*inFName=basename(inputFName), //extrait le nom de fichier
+	*eigValueFName=strdup(argv[2]);
+	strcat(strcat(eigValueFName,"eigval_"), inFName);
+	/*
+	*eigVectorFName=strdup(argv[2]);//nom du fichier de sortie
+	strcat(strcat(eigVectorFName,"eigvec_"),inFName);
+	printf("Output file for eigenvalues :%s\nOutput file for eigenvectors : %s\n",eigValueFName,eigVectorFName );
+	*/
 	//-------------------------------
 	FILE *flux = fopen( argv[1], "r" );
 	status=fscanf( flux, "%u\n", &dim ) ;
-	double (*M)[dim];
-	M = (double (*)[dim]) calloc( dim*dim, sizeof(double) ) ;
+	double M[dim][dim];
+	// double (*M)[dim];
+	// M = (double (*)[dim]) calloc( dim*dim, sizeof(double) ) ;
 	for ( i=0 ; i < dim ; i++ ){
 		for( j=0 ; j < dim ; j++ ){
 			status+=fscanf( flux, "%lf", &M[i][j] ) ;
@@ -64,13 +70,26 @@ int main(int argc, char *argv[])
 	/*
 	* Rotation de Jacobi avec J(M, dim, spc)
 	*/
-	printf("\033[31mProcessing : %s\t===>\t%s\033[0m\n", inFName, outName);
-	double	*spc=(double *)calloc(dim, sizeof( double ));//Matrice lire et spectre des valeurs propres
-	Niteration=jacobi(&M[0][0], dim, spc) ;
-	FILE *fout=fopen(outName, "w");
+	printf("\033[31mProcessing : %s\033[0m\n", inputFName);
+	//--------------------------------------------------
+	// Eigenvalues vector
+	double eigVal[dim];
+	// double	*eigVal=(double *)calloc(dim, sizeof( double ));
+	// Eigenvector matrix
+	// double (*eigVec)[dim];
+	//double (*eigVec)[dim]=NULL;
+	// Calculate eigenvalues
+	Niteration=jacobi(dim, &M[0][0], eigVal) ;
+	FILE *fout=fopen(eigValueFName, "w");
 	fprintf( fout, "# total iteration : %03d\n", Niteration ) ;
-	mat_write(1,dim, spc, fout);
+	mat_write(1,dim, eigVal, fout);
 	fclose(fout) ;
-	free(spc) ; free(M) ;
+	/* Save eigenvectors
+	fout=fopen(eigVectorFName, "w");
+	mat_write(dim,dim,&eigVec[0][0], fout);
+	fclose(fout) ;
+	free(eigVec); 
+	*/
+	free(eigVal);free(M) ;
 	return EXIT_SUCCESS;
 }

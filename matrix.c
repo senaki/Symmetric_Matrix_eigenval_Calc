@@ -165,3 +165,17 @@ double (*mat_eye(const unsigned int dim))[]
    }
    return M;
 }
+int mat_zeros(unsigned int n, unsigned int m, double *mat)
+{
+  /**
+	\brief Set to zero all matrix element
+	\return 1 if succeed, 0 instead.
+  */
+	if(mat==NULL) return -1;
+	if((n<1)||(m<1)) return 0;
+  for(unsigned int i=0 ; i < n ; i++)
+   {
+		 for(unsigned int j=0 ; j < m ; j++) mat[i*n + j]=0.;
+   }
+   return 1;
+}
