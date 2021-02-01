@@ -1,15 +1,23 @@
 # Symmetric matrix eigenvalue calculation with Jacobi's method.
 
-Implementation of eigenvalue calculation of symmetric matrices with Jacobi's method.
-* Matrix is read from an input file *inputfile.dat*
-* Eigenvalues are written into file *eig_inputfile.dat*
+Implementation of eigenvalues calculation of symmetric matrices with Jacobi's method.
+* Matrix is read from a text input file *inputfile*
+* Eigenvalues are written into a text file named  *eig_inputfile*
 
-It is an old MSc project, reshashed and optimized.
+It is a 2015 MSc project, revisited and optimized, published just to show you my style of C-programming ;).
 
 ## Running code
-`rotjacobi /path/to/inputfile.dat /path/to/store/output/`
+On Unix-Like distribution, run :
+
+`./rotjacobi /path/to/inputfile /path/to/store/output/`
 
 Example :  `rotjacobi ./test.dat ./`
+
+Output :  
+
+    Processing /path/to/inputfile.dat
+
+    Duration : XXXX ms | Number of rotation : XXXX
 
 ## Input file structure
 The first line contains the matrix dimension *n*.
@@ -41,10 +49,21 @@ where y_n is the n-th eigenvalue.
 The second line gives the column matrix containing the eigenvalues.
 
 ## Source structure
-* __main.c__ : main program
-* __matrix.c__ : function declaration for matrix manipulation
-* __jacobi.c__ : implements Jacobi's rotation
-* __inclusion.h__ : declares functions' prototypes
-* __Makefile__ : Makefile to compile the source code
-* __make.bat__ : batch scrip to compile source code on Windows
-* __test.dat__: test input file
+* __main.c__ :
+  * main program
+* __matrix.c__ :
+  * function declaration for matrix manipulation
+* __jacobi.c__ :
+  * implements Jacobi's rotation
+* __inclusion.h__ :
+  * declares functions' prototypes
+* __Makefile__ :
+  * Makefile to compile the source code
+* __make.bat__ :
+  * batch script to compile source code on Windows
+* __test.dat__ :
+  * test file with a 52x52 symmetric matrix input file
+* __test_all.{ps1, sh}__ :  
+  * powershell script for users on Windows or Unix-Like distros Os.
+  * Run with
+    `& "test_all.ps1" -src "input/path/" -des "output/path/"`or `"sh ./test_all.sh "input/path/" output/path/` where *input/path/* directory contains input data files and *output/path/* will receive the associated output data files.
