@@ -52,7 +52,10 @@ int main(int argc, char *argv[])
 	printf("Output file for eigenvalues :%s\nOutput file for eigenvectors : %s\n",eigValueFName,eigVectorFName );
 	*/
 	//-------------------------------
-	FILE *flux = fopen( argv[1], "r" );
+	if( (FILE *flux = fopen( inputFName, "r" ) == 0 ){
+		fputs("The input file does not open for reading", stderr);
+		exit(EXIT_FAILURE);
+	}
 	status=fscanf( flux, "%u\n", &dim ) ;
 	double M[dim][dim];
 	// double (*M)[dim];
