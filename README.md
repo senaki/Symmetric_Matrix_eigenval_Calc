@@ -62,7 +62,7 @@ The second line gives the column matrix containing the eigenvalues.
 * __make.bat__ :
   * batch script to compile source code on Windows
 * __test.dat__ :
-  * test file with a 52x52 symmetric matrix input file
+  * test file with a 52x52 symmetric matrix
 * __test_all.{ps1, sh}__ :  
   * powershell script for users on Windows or Unix-Like distros Os.
   * Run with
