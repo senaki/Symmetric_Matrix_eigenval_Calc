@@ -88,8 +88,8 @@ int main(int argc, char *argv[])
 	fout=fopen(eigVectorFName, "w");
 	mat_write(dim,dim,&eigVec[0][0], fout);
 	fclose(fout) ;
-	free(eigVec); 
+	free(eigVec);
 	*/
-	free(eigVal);free(M) ;
+	//free(eigVal);free(M) ;
 	return EXIT_SUCCESS;
 }
