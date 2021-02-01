@@ -1,8 +1,9 @@
 @echo off
 REM:Makefie
-set src=matrix.c jacobi.c main.c
+set src=src/matrix.c src/jacobi.c src/main.c
 set obj=matrix.o jacobi.o main.o
 set opt1= -static -std=gnu11 -O3 -lm -W -Wall
+REM : change the path to gcc 
 set gcc="c:\mingw\bin\gcc.exe"
 set prog=rotjacobi.exe
 if "%1"=="clean" goto clean

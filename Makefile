@@ -1,11 +1,11 @@
 rotjacobi : matrix.o jacobi.o main.o
 	gcc -O matrix.o jacobi.o main.o -lm -o rotjacobi
-matrix.o : matrix.c inclusions.h
-	gcc -c -std=gnu11 -O3 -W -Wall -lm matrix.c
-jacobi.o : matrix.c jacobi.c inclusions.h
-	gcc -c -std=gnu11 -O3 -W -Wall -lm jacobi.c
-main.o : matrix.c jacobi.c main.c inclusions.h
-	gcc -c -std=gnu11 -O3 -W -Wall main.c
+matrix.o : src/matrix.c src/inclusions.h
+	gcc -c -std=gnu11 -O3 -W -Wall -lm src/matrix.c
+jacobi.o : src/matrix.c src/jacobi.c src/inclusions.h
+	gcc -c -std=gnu11 -O3 -W -Wall -lm src/jacobi.c
+main.o : src/matrix.c src/jacobi.c src/main.c src/inclusions.h
+	gcc -c -std=gnu11 -O3 -W -Wall src/main.c
 
 clean:
 	rm matrix.o jacobi.o main.o
