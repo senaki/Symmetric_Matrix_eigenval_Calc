@@ -1,4 +1,4 @@
-# Symmetric matrix eigenvalue calculation with Jacobi's method.
+# Symmetric matrix eigenvalues calculation with Jacobi's method.
 
 Implementation of eigenvalues calculation of symmetric matrices with Jacobi's method.
 * Matrix is read from a text input file *inputfile*
