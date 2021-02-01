@@ -1,4 +1,5 @@
 #include "inclusions.h"
+#include <time.h>
 /**
 \author Serge Kiki
 *\brief Calculate eigenvalues of symmetric square matrices by Jacobi's algorithm
@@ -8,10 +9,11 @@
 */
 const char msg[]="Eigen values of symmetric matrices calculated by the Jacobi's algorithm";
 void welcom_msg(const char *msg){
+	size_t msgLen = strlen(msg), i ;
 	printf("\033[33m") ;
-	for ( unsigned int i=0 ; i < strlen( msg ) ; i++ ) printf("*") ;
+	for ( i=0 ; i < msgLen ; i++ ) printf("*") ;
 	printf("\n%s\n%s\n", msg, author) ;
-	for ( unsigned int i=0 ; i < strlen( msg ) ; i++ ) printf("*") ;
+	for ( i=0 ; i < msgLen ; i++ ) printf("*") ;
 	printf("\033[0m\n") ;
 }
 
@@ -25,8 +27,8 @@ int main(int argc, char *argv[])
 	}
 	FILE *fidFLAG;
 	int status;
+	unsigned int FLAG=0;;
 	//Pour afficher une seule fois le message d'accueil
-	static unsigned int FLAG=0;
 	if ( (fidFLAG=fopen(".flag","r+")) == NULL ){
 		fidFLAG=fopen(".flag", "w+");
 		welcom_msg( msg );//Message d'accueil
@@ -40,8 +42,7 @@ int main(int argc, char *argv[])
 		fprintf(fidFLAG,"%u", FLAG);
 		fclose(fidFLAG);
 	}
-	unsigned int i, j, dim=2,//dimension de la matrice
-	Niteration=0 ;//Nombre d'itérations
+	size_t i, j ;//Nombre d'itérations
 	char *inputFName=strdup(argv[1]),//duplique argv
 	*inFName=basename(inputFName), //extrait le nom de fichier
 	*eigValueFName=strdup(argv[2]);
@@ -54,9 +55,10 @@ int main(int argc, char *argv[])
 	//-------------------------------
 	FILE *flux = fopen( inputFName, "r" );
 	if( flux == NULL ){
-		fputs("The input file does not open for reading", stderr);
+		fprintf(stderr,"The input file does not open for reading\n");
 		exit(EXIT_FAILURE);
 	}
+	unsigned int dim=2;//dimension de la matrice
 	status=fscanf( flux, "%u\n", &dim ) ;
 	double M[dim][dim];
 	// double (*M)[dim];
@@ -68,7 +70,7 @@ int main(int argc, char *argv[])
 	}
 	if ( IsSym(dim, &M[0][0]) != 1 )
 	{
-		fputs("This matrix is not symmetric", stderr);
+		fprintf(stderr,"This matrix is not symmetric\n");
 		exit(EXIT_FAILURE) ;
 	}
 	/*
@@ -83,17 +85,23 @@ int main(int argc, char *argv[])
 	// double (*eigVec)[dim];
 	//double (*eigVec)[dim]=NULL;
 	// Calculate eigenvalues
-	Niteration=jacobi(dim, &M[0][0], eigVal) ;
+	clock_t start, end; // Mesurate calculation duration
+	start=clock();
+	size_t Niteration=jacobi(dim, &M[0][0], eigVal) ;
+	end=clock();
+	// Save the eigenvalues
 	FILE *fout=fopen(eigValueFName, "w");
-	fprintf( fout, "# total iteration : %03d\n", Niteration ) ;
+	fprintf( fout, "# total iteration : %03lu\n", Niteration ) ;
 	mat_write(1,dim, eigVal, fout);
 	fclose(fout) ;
-	/* Save eigenvectors
+	/* Save the eigenvectors
 	fout=fopen(eigVectorFName, "w");
 	mat_write(dim,dim,&eigVec[0][0], fout);
 	fclose(fout) ;
 	free(eigVec);
 	*/
 	//free(eigVal);free(M) ;
+	printf("Duration : %ld ms | Number of rotation : %lu\n",
+	(end-start)*1000/CLOCKS_PER_SEC, Niteration);
 	return EXIT_SUCCESS;
 }

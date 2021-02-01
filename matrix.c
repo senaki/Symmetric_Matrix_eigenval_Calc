@@ -3,11 +3,11 @@
 Write an ascii square matrix
 */
 ///int mat_write(char *file_name, int n, double *a )
-int mat_write(unsigned int n,unsigned int m, const double *a, FILE* stream )
+int mat_write(size_t n,size_t m, const double *a, FILE* stream )
 {
   /**
   \brief Write a nxm matrix into a file \param filename
-  \fn int mat_write(unsigned int n, unsigned int m, const double *mat, const char *filename, const char *mode)
+  \fn int mat_write(size_t n, size_t m, const double *mat, const char *filename, const char *mode)
   \param n
     number of row
   \param m
@@ -19,9 +19,9 @@ int mat_write(unsigned int n,unsigned int m, const double *a, FILE* stream )
   */
 	//FILE *fich= fopen(file_name, mode);
 	if (stream==NULL) return -1 ;
-	fprintf(stream, "# matrix size : %u x %u\n", n, m);
-   	for(unsigned int i=0 ; i < n ; i++){
-			for( unsigned int j=0 ; j < m ; j++) {
+	fprintf(stream, "# matrix size : %lu x %lu\n", n, m);
+   	for(size_t i=0 ; i < n ; i++){
+			for( size_t j=0 ; j < m ; j++) {
 				fprintf(stream, "%07.4lf%c", a[i*n + j], (n==1 || m==1)? '\n':'\t') ;
 			}
 			if (i<n-1) fputc('\n', stream );
@@ -29,16 +29,16 @@ int mat_write(unsigned int n,unsigned int m, const double *a, FILE* stream )
 		return 0 ;
 }
 
-int mat_print(unsigned int n,unsigned int m, const double *in)
+int mat_print(size_t n,size_t m, const double *in)
 {
 	/**
 	\brief Prints a nrow-by-nrow matrix to the screen
-	\fn int mat_print(unsigned int n, unsigned int m, const double *mat)
+	\fn int mat_print(size_t n, size_t m, const double *mat)
 	\param n {number of row}
 	\param m {number of column}
 	\param *mat {matrix reference}
 	*/
-	unsigned int i,j;
+	size_t i,j;
 	if(in == NULL){
 		fputs("You provided a null pointer", stderr);
 		return -1;
@@ -53,7 +53,7 @@ int mat_print(unsigned int n,unsigned int m, const double *in)
 	return 0;
 }
 
-int IsSym( unsigned int n, const double *in)
+int IsSym( size_t n, const double *in)
 {
   /**
   \brief Checks if the matrix in is symmetric
@@ -61,7 +61,7 @@ int IsSym( unsigned int n, const double *in)
   \param nrow, ncol {number of row and column}
   \return { 0 if success, otherwise -1}
   */
-  unsigned int i, j=0;
+  size_t i, j=0;
   if( in==NULL )
   {
     fputs("\033[31mThe Matrix is not a square or is a NULL pointer\033[0m", stderr);
@@ -78,14 +78,14 @@ int IsSym( unsigned int n, const double *in)
 
 //--
 //--
-void mat_sum(unsigned int n, const double *a, const double *b, double *out)
+void mat_sum(size_t n, const double *a, const double *b, double *out)
 {
   /**
   \brief Sum two square matrices a and b and write the output into out matrix.
   \fn void mat_sum(int n, double *a, double *b, double *out)
   \param n matrix dimension
   */
-  unsigned int i, j;
+  size_t i, j;
   for( i=0; i< n; i++)
   {
     for(j=0; j<n; j++) out[i*n + j] = a[i*n + j]+b[i*n + j];
@@ -93,23 +93,23 @@ void mat_sum(unsigned int n, const double *a, const double *b, double *out)
 }
 //--
 //--
-void transpose(unsigned int nrow, unsigned int ncol, const double *A, double *out)
+void transpose(size_t nrow, size_t ncol, const double *A, double *out)
 {
   /**
   \fn Transpose(int nrow, int ncol, double *A, double *out)
   \brief Calculates the transpose of a nrow-by-ncol matrix A and put it in the matrix ncol-by-nrow
   A and out must be declared agree with the the dimension
   */
-  for(unsigned int i=0; i<nrow; i++)
+  for(size_t i=0; i<nrow; i++)
   {
-    for(unsigned int j=0; j<ncol; j++) *(out+ j*nrow +i)=*(A +i*ncol +j);
+    for(size_t j=0; j<ncol; j++) *(out+ j*nrow +i)=*(A +i*ncol +j);
   }
 }
 
-inline void Cross(unsigned int a_nrow,
-  unsigned int b_nrow,
-  unsigned int a_ncol,
-  unsigned int b_ncol,
+inline void Cross(size_t a_nrow,
+  size_t b_nrow,
+  size_t a_ncol,
+  size_t b_ncol,
   const double * restrict A,
   const double * restrict B,
   double * restrict C)
@@ -120,7 +120,7 @@ inline void Cross(unsigned int a_nrow,
   \brief Calculate the cross product of the A by B and put the result into C.
   Their dimension must agree.
   */
-  unsigned int i,j,k;
+  size_t i,j,k;
   if(b_nrow == a_ncol)
   {
     for(i=0; i< a_nrow; i++)
@@ -135,7 +135,7 @@ inline void Cross(unsigned int a_nrow,
   }
 }
 
-int IsOrtho(unsigned int n, const double *in)
+int IsOrtho(size_t n, const double *in)
 {
   /**\fn int IsOrtho(int nrow, int ncol, const double *in)
   * \brief Check if the matrix in is orthogonal
@@ -143,7 +143,7 @@ int IsOrtho(unsigned int n, const double *in)
   double m1[n][n], mout[n][n];
   transpose(n, n, in, &m1[0][0]);
   Cross(n,n,n,n, &m1[0][0], in, &mout[0][0]);
-  unsigned int i=0;
+  size_t i=0;
   do
   {
     ++i;
@@ -151,7 +151,7 @@ int IsOrtho(unsigned int n, const double *in)
   while( i < n );
   return (i == n) ? 1 : 0 ;
 }
-double (*mat_eye(const unsigned int dim))[]
+double (*mat_eye(const size_t dim))[]
 {
   /** \brief Return the square Identy matrix of dimension dim
   \param dim : the dimension of the matrix
@@ -159,13 +159,13 @@ double (*mat_eye(const unsigned int dim))[]
   if (dim<2) return NULL;
   static double (*M)[dim];
   M=(double (*)[dim]) calloc(dim*dim, sizeof(double));
-  for(unsigned int i=0 ; i < dim ; i++)
+  for(size_t i=0 ; i < dim ; i++)
    {
      M[i][i]=1.0;
    }
    return M;
 }
-int mat_zeros(unsigned int n, unsigned int m, double *mat)
+int mat_zeros(size_t n, size_t m, double *mat)
 {
   /**
 	\brief Set to zero all matrix element
@@ -173,9 +173,9 @@ int mat_zeros(unsigned int n, unsigned int m, double *mat)
   */
 	if(mat==NULL) return -1;
 	if((n<1)||(m<1)) return 0;
-  for(unsigned int i=0 ; i < n ; i++)
+  for(size_t i=0 ; i < n ; i++)
    {
-		 for(unsigned int j=0 ; j < m ; j++) mat[i*n + j]=0.;
+		 for(size_t j=0 ; j < m ; j++) mat[i*n + j]=0.;
    }
    return 1;
 }

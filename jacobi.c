@@ -3,13 +3,13 @@
 \brief FINDS THE EIGENVALUES OF SYMMETRIC MATRICES
 m BY THE JACOBI'S ROTATION in a n-dimensional vectorial space
 * See matrix.c and inclusions.h files for descriptions of the functions used in this code.
-* \fn jacobi(double *M, unsigned int n, double *p)
+* \fn jacobi(double *M, sizet_ n, double *p)
 * \param n dimension of the square matrix
 * \param p Matrix reference
 */
-unsigned int jacobi(unsigned int n, const double *M, double *sp)
+size_t jacobi(size_t n, const double *M, double *sp)
 {
-  unsigned int idx[2]={0,1}, i, j, Niteration=0 ;
+  size_t idx[2]={0,1}, i, j, Niteration=0 ;
   /*
   idx receives the indexes of the maximal off-diagonal elementn is the size of
   the square matrix we deal with
