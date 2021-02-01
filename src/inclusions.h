@@ -2,7 +2,7 @@
 #define _GNU_SOURCE
 #ifndef INCLUSIONS_H_INCLUDED
 #define INCLUSIONS_H_INCLUDED
-#define author "SERGE KIKI"
+#define author "Serge NKS"
 #define TOL 1E-6
 #include <stdlib.h>
 #include <stdio.h>
