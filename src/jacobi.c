@@ -1,11 +1,12 @@
 #include "inclusions.h"
 /**
-\brief FINDS THE EIGENVALUES OF SYMMETRIC MATRICES
-m BY THE JACOBI'S ROTATION in a n-dimensional vectorial space
+\brief Finds the eigenvalues of symmetric matrix M by Jacobi's method.
 * See matrix.c and inclusions.h files for descriptions of the functions used in this code.
-* \fn jacobi(double *M, sizet_ n, double *p)
+* \fn jacobi(size_t n, const double *M, double *sp)
 * \param n dimension of the square matrix
-* \param p Matrix reference
+* \param M symmetric matrix
+* \param sp sp stores eigenvalues of M
+  \return Niteration the number of iterations
 */
 size_t jacobi(size_t n, const double *M, double *sp)
 {
