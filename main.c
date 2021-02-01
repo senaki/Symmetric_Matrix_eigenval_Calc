@@ -52,7 +52,8 @@ int main(int argc, char *argv[])
 	printf("Output file for eigenvalues :%s\nOutput file for eigenvectors : %s\n",eigValueFName,eigVectorFName );
 	*/
 	//-------------------------------
-	if( (FILE *flux = fopen( inputFName, "r" ) == 0 ){
+	FILE *flux = fopen( inputFName, "r" );
+	if( flux == NULL ){
 		fputs("The input file does not open for reading", stderr);
 		exit(EXIT_FAILURE);
 	}
