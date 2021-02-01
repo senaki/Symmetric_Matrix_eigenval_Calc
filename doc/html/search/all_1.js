@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['author_2',['author',['../inclusions_8h.html#a8624969d4fe8e65e0f73a3acc71fd1a5',1,'inclusions.h']]]
+];
