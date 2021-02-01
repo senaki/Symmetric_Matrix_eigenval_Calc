@@ -2,7 +2,7 @@ Param([string]$src, [string]$des);
 
 $Content=Get-ChildItem -Name $src;
 $OutPath=$des;
-for ($i=0; $i -lt $( $Content.length - 1 ) ; $i++){
+for ($i=0; $i -lt $( $Content.length ) ; $i++){
 	$inFile=$src+$Content[$i] ;
 	./rotjacobi.exe $inFile $OutPath ;
 }

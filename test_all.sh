@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-inputFolder="${PWD}/../input/";
-for file in $(ls | sort $inputFolder) do
-	./rotjacobi $file ;
+inPath=$(readlink -f $1);
+for file in $(dir $1)
+do
+	#  echo ""
+	 ./rotjacobi "$(readlink -f ${file})" $2 ;
 done
-
-
+echo -e "Congratulations, it's all done !"
+exit 0 ;
