@@ -1,6 +1,6 @@
 # Symmetric matrix eigenvalues calculation with Jacobi's method.
 
-Implementation of eigenvalues calculation of symmetric matrices with Jacobi's method.
+Implementation of eigenvalues calculation for symmetric matrices with Jacobi's method.
 * Matrix is read from a text input file *inputfile*
 * Eigenvalues are written into a text file named  *eig_inputfile*
 
