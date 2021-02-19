@@ -15,13 +15,11 @@ Example :  `rotjacobi ./test.dat ./`
 
 Output :  
 
-    Processing /path/to/inputfile.dat
-
-    Duration : XXXX ms | Number of rotation : XXXX
+    Processing /path/to/inputfile.dat took : XXXX ms | XXXX rotations
 
 ## Input file structure
 The first line contains the matrix dimension *n*.
-The following lines contain the matrix elements separeted by a blank (white space or tabulation).
+The following lines contain the matrix elements separated by a blank (white space or tabulation).
 The matrix row ends with a newline character.
 ### Example of input file
 

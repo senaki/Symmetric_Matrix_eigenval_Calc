@@ -47,22 +47,19 @@ int main(int argc, char *argv[])
 	*inFName=basename(inputFName), //extrait le nom de fichier
 	*eigValueFName=strdup(argv[2]);
 	strcat(strcat(eigValueFName,"eigval_"), inFName);
-	/*
-	*eigVectorFName=strdup(argv[2]);//nom du fichier de sortie
-	strcat(strcat(eigVectorFName,"eigvec_"),inFName);
-	printf("Output file for eigenvalues :%s\nOutput file for eigenvectors : %s\n",eigValueFName,eigVectorFName );
-	*/
 	//-------------------------------
 	FILE *flux = fopen( inputFName, "r" );
 	if( flux == NULL ){
 		fprintf(stderr,"The input file does not open for reading\n");
 		exit(EXIT_FAILURE);
 	}
-	unsigned int dim=2;//dimension de la matrice
+	/**
+	\param dim dimension de la matrice
+	\param M matrice
+	*/
+	unsigned int dim=2;
 	status=fscanf( flux, "%u\n", &dim ) ;
 	double M[dim][dim];
-	// double (*M)[dim];
-	// M = (double (*)[dim]) calloc( dim*dim, sizeof(double) ) ;
 	for ( i=0 ; i < dim ; i++ ){
 		for( j=0 ; j < dim ; j++ ){
 			status+=fscanf( flux, "%lf", &M[i][j] ) ;
@@ -74,18 +71,10 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE) ;
 	}
 	/*
-	* Rotation de Jacobi avec J(M, dim, spc)
+		Calculate eigenvalues with Jacobi rotation : J(dim, *M, *spc)
 	*/
-	printf("\033[31mProcessing : %s\033[0m\n", inputFName);
-	//--------------------------------------------------
-	// Eigenvalues vector
-	double eigVal[dim];
-	// double	*eigVal=(double *)calloc(dim, sizeof( double ));
-	// Eigenvector matrix
-	// double (*eigVec)[dim];
-	//double (*eigVec)[dim]=NULL;
-	// Calculate eigenvalues
-	clock_t start, end; // Mesurate calculation duration
+	double eigVal[dim];// Eigenvalues vector
+	clock_t start, end; // Measurement of duration
 	start=clock();
 	size_t Niteration=jacobi(dim, &M[0][0], eigVal) ;
 	end=clock();
@@ -94,14 +83,8 @@ int main(int argc, char *argv[])
 	fprintf( fout, "# total iteration : %03lu\n", Niteration ) ;
 	mat_write(1,dim, eigVal, fout);
 	fclose(fout) ;
-	/* Save the eigenvectors
-	fout=fopen(eigVectorFName, "w");
-	mat_write(dim,dim,&eigVec[0][0], fout);
-	fclose(fout) ;
-	free(eigVec);
-	*/
-	//free(eigVal);free(M) ;
-	printf("Duration : %ld ms | Number of rotation : %lu\n",
-	(end-start)*1000/CLOCKS_PER_SEC, Niteration);
+	printf("\033[31mProcessing %s took : ", inputFName);
+	printf("%ld ms | %lu rotation%c\033[0m\n",
+	(end-start)*1000/CLOCKS_PER_SEC, Niteration, (Niteration>1)?'s':' ');
 	return EXIT_SUCCESS;
 }
