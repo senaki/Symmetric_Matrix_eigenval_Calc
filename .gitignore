@@ -4,3 +4,5 @@ flag
 test.m
 .flag
 rotjacobi
+eigval_*.txt
+*.o
