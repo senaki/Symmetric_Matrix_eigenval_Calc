@@ -16,12 +16,12 @@ extern int mat_print(size_t n, size_t m, const double *in);
 //from a file
 extern int mat_write( size_t n, size_t m, const  double *a, FILE *stream );
 //extern size_t jacobi(size_t n, const double *m, double *outEigVal, double *outEigVec); Next release
-extern size_t jacobi(size_t n, const double *m, double *outEigVal);
+extern size_t jacobi(size_t n, double (*m)[n]);
 extern int IsSym( size_t n, const double *in);//Check if the matrix is symmetric
 extern int IsOrtho(size_t n, const double *in);
 extern void transpose(size_t nrow, size_t ncol, const double *A, double *out);
-extern void Cross(size_t Anrow, size_t Bnrow, size_t Ancol, size_t Nncol,
-  const double* restrict A, const double* restrict B, double* restrict C);//matricial product
+extern int Cross(size_t Anrow, size_t Bnrow, size_t Ancol, size_t Nncol,
+  const double *A, const double *B, double *C);//matricial product
 extern void mat_sum(size_t n, const double *a, const double *b, double *out); //matrix sum
 extern int mat_zeros(size_t n, size_t m, double *mat) ;
 extern double (*mat_eye(const size_t dim))[] ;

@@ -1,5 +1,5 @@
 #include "inclusions.h"
-int mat_write(size_t n,size_t m, const double *a, FILE* stream )
+int mat_write(size_t n, size_t m, const double *a, FILE* stream )
 {
   /**
   \brief Writes a nxm matrix into a file \param filename
@@ -15,18 +15,18 @@ int mat_write(size_t n,size_t m, const double *a, FILE* stream )
 		\return
 		-1 if an error occurred, 0 instead
   */
-	if (stream==NULL) return -1 ;
-	fprintf(stream, "# matrix size : %lu x %lu\n", n, m);
-   	for(size_t i=0 ; i < n ; i++){
-			for( size_t j=0 ; j < m ; j++) {
+	if ( stream == NULL ) return -1 ;
+	fprintf( stream, "# matrix size : %lu x %lu\n", n, m);
+   	for( size_t i=0 ; i < n ; i++ ){
+			for( size_t j=0 ; j < m ; j++ ) {
 				fprintf(stream, "%07.4lf%c", a[i*n + j], (n==1 || m==1)? '\n':'\t') ;
 			}
-			if (i<n-1) fputc('\n', stream );
+			if ( i < n-1 ) fputc('\n', stream );
     }
 		return 0 ;
 }
 
-int mat_print(size_t n,size_t m, const double *in)
+int mat_print(size_t n, size_t m, const double *in)
 {
 	/**
 	\brief Prints a nrow-by-nrow matrix to the screen
@@ -50,7 +50,7 @@ int mat_print(size_t n,size_t m, const double *in)
 	return 0;
 }
 
-int IsSym( size_t n, const double *in)
+int IsSym( size_t n, const double *in )
 {
   /**
   \brief Checks if the matrix in is symmetric
@@ -64,10 +64,10 @@ int IsSym( size_t n, const double *in)
     fputs("\033[31mThe Matrix is not a square or is a NULL pointer\033[0m", stderr);
     return -1;
   }
-  for(i=0 ; i < n; i++){
-    for (j=n-1 ; j>i; j--)
+  for( i=0 ; i < n; i++ ){
+    for ( j=n-1 ; j>i; j-- )
     {
-      if( in[j*n +i] != in[i*n+j] ) return 0 ; //not symmetric
+      if( in[j*n + i] != in[ i*n + j ] ) return 0 ; //not symmetric
     }
   }
   return 1 ;
@@ -88,11 +88,9 @@ void mat_sum(size_t n, const double *a, const double *b, double *out)
   size_t i, j;
   for( i=0; i< n; i++)
   {
-    for(j=0; j<n; j++) out[i*n + j] = a[i*n + j]+b[i*n + j];
+    for(j=0; j<n; j++) out[ i*n + j ] = a[ i*n + j ] + b[ i*n + j] ;
   }
 }
-//--
-//--
 void transpose(size_t nrow, size_t ncol, const double *A, double *out)
 {
   /**
@@ -102,37 +100,41 @@ void transpose(size_t nrow, size_t ncol, const double *A, double *out)
   */
   for(size_t i=0; i<nrow; i++)
   {
-    for(size_t j=0; j<ncol; j++) *(out+ j*nrow +i)=*(A +i*ncol +j);
+    for(size_t j=0; j<ncol; j++) *(out + j*nrow +i)=*(A +i*ncol +j);
   }
 }
 
-inline void Cross(size_t a_nrow,
-  size_t b_nrow,
-  size_t a_ncol,
-  size_t b_ncol,
-  const double * restrict A,
-  const double * restrict B,
-  double * restrict C)
-{
-  /**
-  \fn void Cross(int a_nrow, int b_nrow, int a_ncol,int b_ncol, const double * restrict A, const double * restrict B, double * restrict C)
-  \brief Calculates the cross product of the A by B and put the result into C.
-  Their dimension must agree.
-  */
-  size_t i,j,k;
-  if(b_nrow == a_ncol)
-  {
-    for(i=0; i< a_nrow; i++)
-    {
-      for(j=0; j< b_ncol; j++)
-      {
-        C[i*b_ncol+j]=A[i*a_ncol+0]*B[0+j];
-        for(k=1; k < a_ncol; k++)
-        C[i*b_ncol+j] += A[i*a_ncol+k]*B[k*b_ncol+j];
-      }
-    }
-  }
-}
+inline int Cross(
+	size_t a_nrow,
+	size_t b_nrow,
+	size_t a_ncol,
+	size_t b_ncol,
+	const double *A,
+	const double *B,
+	double *C)
+	{
+		/**
+		\fn void Cross(int a_nrow, int b_nrow, int a_ncol,int b_ncol, const double * restrict A, const double * restrict B, double * restrict C)
+		\brief Calculates the cross product of the A by B  A*B=C and put the result into C.
+		Their dimension must agree.
+		c(i,j)=sum( a(i,k)*b(k,j)), 1<k<a_nrow and 	a_ncol == b_nrow
+		C is a_nrow-by-b_ncol matrix
+		*/
+		if( a_ncol != b_nrow ) {
+			fprintf(stderr,"Error in matrix product : dimensions do not match.\n");
+			return -1 ;
+		}
+		for( size_t i=0 ; i < a_nrow ; i++)
+		{
+			for( size_t j=0 ; j < b_ncol; j++)
+			{
+				*(C + i*b_ncol + j )=0.0;
+				for( size_t k=0 ; k < a_ncol ; k++)
+				*(C + i*b_ncol + j ) += *( A + i*a_ncol + k )* (*(B+k*b_ncol + j));
+			}
+		}
+		return 1;
+	}
 
 int IsOrtho(size_t n, const double *in)
 {
@@ -161,8 +163,8 @@ double (*mat_eye(const size_t dim))[]
 	The pointer type is : (double *)[dim]
   */
   if (dim<2) return NULL;
-  static double (*M)[dim];
-  M=(double (*)[dim]) calloc(dim*dim, sizeof(double));
+	static double (*M)[dim]=NULL;
+  M=(double (*)[dim]) calloc(dim, sizeof(double[dim]));
   for(size_t i=0 ; i < dim ; i++)
    {
      M[i][i]=1.0;
