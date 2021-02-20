@@ -1,0 +1,64 @@
+.TH "src/main.c" 3 "Sat Feb 20 2021" "Symmetric matrix eigenvalues calculation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/main.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'inclusions\&.h'\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBwelcom_msg\fP (const char *\fBmsg\fP)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const char \fBmsg\fP [] ='Eigen values of symmetric matrices calculated by the Jacobi's algorithm'"
+.br
+.RI "This code calculates eigenvalues of symmetric square matrices by Jacobi's algorithm\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void welcom_msg (const char * msg)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "const char msg[] ='Eigen values of symmetric matrices calculated by the Jacobi's algorithm'"
+
+.PP
+This code calculates eigenvalues of symmetric square matrices by Jacobi's algorithm\&. 
+.PP
+\fBAuthor\fP
+.RS 4
+Serge Kiki
+.RE
+.PP
+This code calculates eigenvalues of symmetric square matrices by Jacobi's algorithm\&.
+.PP
+Usage : rotjacobi arg1 arg2
+.PP
+\fBParameters\fP
+.RS 4
+\fIarg1\fP : input file with dim in the first ROW and the matrix element in the following 
+.br
+\fIarg2\fP : output path where the eigenvalues file will be created 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Do not use it for matrix wih dimension greater than 500 : possible memory issue ! 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Symmetric matrix eigenvalues calculation from the source code\&.

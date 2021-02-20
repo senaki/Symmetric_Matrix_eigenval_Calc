@@ -1,0 +1,229 @@
+\doxysection{src/inclusions.h File Reference}
+\label{inclusions_8h}\index{src/inclusions.h@{src/inclusions.h}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$libgen.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ \+\_\+\+POSIX\+\_\+\+C\+\_\+\+SOURCE}~200809L
+\item 
+\#define \textbf{ \+\_\+\+GNU\+\_\+\+SOURCE}
+\item 
+\#define \textbf{ INCLUSIONS\+\_\+\+H\+\_\+\+INCLUDED}
+\item 
+\#define \textbf{ author}~\char`\"{}Serge NKS\char`\"{}
+\item 
+\#define \textbf{ TOL}~1E-\/6
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \textbf{ strdup} (const char $\ast$)
+\item 
+int \textbf{ mat\+\_\+print} (size\+\_\+t n, size\+\_\+t m, const double $\ast$in)
+\item 
+int \textbf{ mat\+\_\+write} (size\+\_\+t n, size\+\_\+t m, const double $\ast$a, FILE $\ast$stream)
+\item 
+size\+\_\+t \textbf{ jacobi} (size\+\_\+t n, double($\ast$m)[n])
+\begin{DoxyCompactList}\small\item\em Finds the eigenvalues of symmetric matrix M by Jacobi\textquotesingle{}s method. See \doxyref{matrix.\+c}{p.}{matrix_8c} and \doxyref{inclusions.\+h}{p.}{inclusions_8h} files for descriptions of the functions used in this code. \end{DoxyCompactList}\item 
+int \textbf{ Is\+Sym} (size\+\_\+t n, const double $\ast$in)
+\item 
+int \textbf{ Is\+Ortho} (size\+\_\+t n, const double $\ast$in)
+\item 
+void \textbf{ transpose} (size\+\_\+t nrow, size\+\_\+t ncol, const double $\ast$A, double $\ast$out)
+\item 
+int \textbf{ Cross} (size\+\_\+t Anrow, size\+\_\+t Bnrow, size\+\_\+t Ancol, size\+\_\+t Nncol, const double $\ast$A, const double $\ast$B, double $\ast$C)
+\item 
+void \textbf{ mat\+\_\+sum} (size\+\_\+t n, const double $\ast$a, const double $\ast$b, double $\ast$out)
+\item 
+int \textbf{ mat\+\_\+zeros} (size\+\_\+t n, size\+\_\+t m, double $\ast$mat)
+\item 
+double($\ast$ \textbf{ mat\+\_\+eye} (const size\+\_\+t dim))[$\,$]
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{inclusions_8h_a369266c24eacffb87046522897a570d5}} 
+\index{inclusions.h@{inclusions.h}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
+\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{\_GNU\_SOURCE}
+{\footnotesize\ttfamily \#define \+\_\+\+GNU\+\_\+\+SOURCE}
+
+\mbox{\label{inclusions_8h_a3024ccd4a9af5109d24e6c57565d74a1}} 
+\index{inclusions.h@{inclusions.h}!\_POSIX\_C\_SOURCE@{\_POSIX\_C\_SOURCE}}
+\index{\_POSIX\_C\_SOURCE@{\_POSIX\_C\_SOURCE}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{\_POSIX\_C\_SOURCE}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+C\+\_\+\+SOURCE~200809L}
+
+\mbox{\label{inclusions_8h_a8624969d4fe8e65e0f73a3acc71fd1a5}} 
+\index{inclusions.h@{inclusions.h}!author@{author}}
+\index{author@{author}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{author}
+{\footnotesize\ttfamily \#define author~\char`\"{}Serge NKS\char`\"{}}
+
+\mbox{\label{inclusions_8h_a7e817f47bf01a5a48982c5eb41446c4f}} 
+\index{inclusions.h@{inclusions.h}!INCLUSIONS\_H\_INCLUDED@{INCLUSIONS\_H\_INCLUDED}}
+\index{INCLUSIONS\_H\_INCLUDED@{INCLUSIONS\_H\_INCLUDED}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{INCLUSIONS\_H\_INCLUDED}
+{\footnotesize\ttfamily \#define INCLUSIONS\+\_\+\+H\+\_\+\+INCLUDED}
+
+\mbox{\label{inclusions_8h_a156b862ebf6d213f5da19b9e3ccb779e}} 
+\index{inclusions.h@{inclusions.h}!TOL@{TOL}}
+\index{TOL@{TOL}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{TOL}
+{\footnotesize\ttfamily \#define TOL~1E-\/6}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{inclusions_8h_ad79d639bdd3f333ad7df4270ecdac412}} 
+\index{inclusions.h@{inclusions.h}!Cross@{Cross}}
+\index{Cross@{Cross}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{Cross()}
+{\footnotesize\ttfamily int Cross (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{Anrow,  }\item[{size\+\_\+t}]{Bnrow,  }\item[{size\+\_\+t}]{Ancol,  }\item[{size\+\_\+t}]{Nncol,  }\item[{const double $\ast$}]{A,  }\item[{const double $\ast$}]{B,  }\item[{double $\ast$}]{C }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Calculates the cross product of the A by B A$\ast$B=C and put the result into C. Their dimension must agree. c(i,j)=sum( a(i,k)$\ast$b(k,j)), 1$<$k$<$a\+\_\+nrow and a\+\_\+ncol == b\+\_\+nrow C is a\+\_\+nrow-\/by-\/b\+\_\+ncol matrix\mbox{\label{inclusions_8h_afffdc6d52699bf181dd2bfd3972a3e8d}} 
+\index{inclusions.h@{inclusions.h}!IsOrtho@{IsOrtho}}
+\index{IsOrtho@{IsOrtho}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{IsOrtho()}
+{\footnotesize\ttfamily int Is\+Ortho (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n,  }\item[{const double $\ast$}]{in }\end{DoxyParamCaption})}
+
+Checks if the matrix in is orthogonal
+
+\begin{DoxyReturn}{Returns}
+1 if true, 0 instead
+\end{DoxyReturn}
+\mbox{\label{inclusions_8h_abb13ba21331fcf9b62962e0400e3cfa4}} 
+\index{inclusions.h@{inclusions.h}!IsSym@{IsSym}}
+\index{IsSym@{IsSym}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{IsSym()}
+{\footnotesize\ttfamily int Is\+Sym (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n,  }\item[{const double $\ast$}]{in }\end{DoxyParamCaption})}
+
+Checks if the matrix in is symmetric
+
+
+\begin{DoxyParams}{Parameters}
+{\em nrow,ncol} & number of row and column \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if success, otherwise -\/1
+\end{DoxyReturn}
+\mbox{\label{inclusions_8h_a40a9fb97b762b5729e2bf00f1a85619f}} 
+\index{inclusions.h@{inclusions.h}!jacobi@{jacobi}}
+\index{jacobi@{jacobi}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{jacobi()}
+{\footnotesize\ttfamily jacobi (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n,  }\item[{double($\ast$)}]{M[n] }\end{DoxyParamCaption})}
+
+
+
+Finds the eigenvalues of symmetric matrix M by Jacobi\textquotesingle{}s method. See \doxyref{matrix.\+c}{p.}{matrix_8c} and \doxyref{inclusions.\+h}{p.}{inclusions_8h} files for descriptions of the functions used in this code. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & dimension of the square matrix \\
+\hline
+{\em M} & symmetric matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Niteration the number of iterations 
+\end{DoxyReturn}
+\mbox{\label{inclusions_8h_a64332b31c0ddb5cb8e039db69bc8045a}} 
+\index{inclusions.h@{inclusions.h}!mat\_eye@{mat\_eye}}
+\index{mat\_eye@{mat\_eye}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{mat\_eye()}
+{\footnotesize\ttfamily double($\ast$ mat\+\_\+eye (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{dim }\end{DoxyParamCaption}))[$\,$]}
+
+Returns the square Identy matrix of dimension dim 
+\begin{DoxyParams}{Parameters}
+{\em dim} & \+: the dimension of the matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return a pointer to a dim-\/by-\/dim matrix M[dim][dim] dynamically allocated. The pointer type is \+: (double $\ast$)[dim]
+\end{DoxyReturn}
+\mbox{\label{inclusions_8h_ada2589940401389c75425d0cd7441789}} 
+\index{inclusions.h@{inclusions.h}!mat\_print@{mat\_print}}
+\index{mat\_print@{mat\_print}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{mat\_print()}
+{\footnotesize\ttfamily int mat\+\_\+print (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n,  }\item[{size\+\_\+t}]{m,  }\item[{const double $\ast$}]{in }\end{DoxyParamCaption})}
+
+Prints a nrow-\/by-\/nrow matrix to the screen
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of row \\
+\hline
+{\em m} & number of column \\
+\hline
+{\em $\ast$mat} & matrix reference\\
+\hline
+\end{DoxyParams}
+\mbox{\label{inclusions_8h_adc00f8f3cd575310c647deff59048bb1}} 
+\index{inclusions.h@{inclusions.h}!mat\_sum@{mat\_sum}}
+\index{mat\_sum@{mat\_sum}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{mat\_sum()}
+{\footnotesize\ttfamily void mat\+\_\+sum (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n,  }\item[{const double $\ast$}]{a,  }\item[{const double $\ast$}]{b,  }\item[{double $\ast$}]{out }\end{DoxyParamCaption})}
+
+Sums two square matrices a and b and write the output into out matrix.
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & matrix dimension \\
+\hline
+{\em a} & matrix \\
+\hline
+{\em b} & matrix \\
+\hline
+{\em out} & output matrix\\
+\hline
+\end{DoxyParams}
+\mbox{\label{inclusions_8h_a894c9dc7d87ddcf69425b414c340fd8d}} 
+\index{inclusions.h@{inclusions.h}!mat\_write@{mat\_write}}
+\index{mat\_write@{mat\_write}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{mat\_write()}
+{\footnotesize\ttfamily int mat\+\_\+write (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n,  }\item[{size\+\_\+t}]{m,  }\item[{const double $\ast$}]{a,  }\item[{FILE $\ast$}]{stream }\end{DoxyParamCaption})}
+
+Writes a nxm matrix into a file
+\begin{DoxyParams}{Parameters}
+{\em filename} & \\
+\hline
+{\em n} & number of row \\
+\hline
+{\em m} & number of column \\
+\hline
+{\em $\ast$mat} & matrix reference \\
+\hline
+{\em $\ast$stream} & valid stream pointer where output is written \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if an error occurred, 0 instead
+\end{DoxyReturn}
+\mbox{\label{inclusions_8h_a345b8037b15465df1fd4143ea6d21ac0}} 
+\index{inclusions.h@{inclusions.h}!mat\_zeros@{mat\_zeros}}
+\index{mat\_zeros@{mat\_zeros}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{mat\_zeros()}
+{\footnotesize\ttfamily int mat\+\_\+zeros (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n,  }\item[{size\+\_\+t}]{m,  }\item[{double $\ast$}]{mat }\end{DoxyParamCaption})}
+
+Sets to zero all the elements of n-\/by-\/m matrix mat \begin{DoxyReturn}{Returns}
+1 if succeed, 0 instead.
+\end{DoxyReturn}
+\mbox{\label{inclusions_8h_a5b35572f751b50eef956a2d054ee48c0}} 
+\index{inclusions.h@{inclusions.h}!strdup@{strdup}}
+\index{strdup@{strdup}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{strdup()}
+{\footnotesize\ttfamily char$\ast$ strdup (\begin{DoxyParamCaption}\item[{const char $\ast$}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{inclusions_8h_ad48400d0d1026af24c42134587ebba16}} 
+\index{inclusions.h@{inclusions.h}!transpose@{transpose}}
+\index{transpose@{transpose}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{transpose()}
+{\footnotesize\ttfamily void transpose (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{nrow,  }\item[{size\+\_\+t}]{ncol,  }\item[{const double $\ast$}]{A,  }\item[{double $\ast$}]{out }\end{DoxyParamCaption})}
+
+Calculates the transpose of a nrow-\/by-\/ncol matrix A and put it in the matrix ncol-\/by-\/nrow A and out must be declared agree with the the dimension

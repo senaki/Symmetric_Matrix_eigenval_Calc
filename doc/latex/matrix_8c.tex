@@ -1,0 +1,36 @@
+\doxysection{src/matrix.c File Reference}
+\label{matrix_8c}\index{src/matrix.c@{src/matrix.c}}
+{\ttfamily \#include \char`\"{}inclusions.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double($\ast$ \textbf{ mat\+\_\+eye} (const size\+\_\+t dim))[$\,$]
+\item 
+int \textbf{ mat\+\_\+zeros} (size\+\_\+t n, size\+\_\+t m, double $\ast$mat)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{matrix_8c_a64332b31c0ddb5cb8e039db69bc8045a}} 
+\index{matrix.c@{matrix.c}!mat\_eye@{mat\_eye}}
+\index{mat\_eye@{mat\_eye}!matrix.c@{matrix.c}}
+\doxysubsubsection{mat\_eye()}
+{\footnotesize\ttfamily double($\ast$ mat\+\_\+eye (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{dim }\end{DoxyParamCaption}))[$\,$]}
+
+Returns the square Identy matrix of dimension dim 
+\begin{DoxyParams}{Parameters}
+{\em dim} & \+: the dimension of the matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return a pointer to a dim-\/by-\/dim matrix M[dim][dim] dynamically allocated. The pointer type is \+: (double $\ast$)[dim]
+\end{DoxyReturn}
+\mbox{\label{matrix_8c_a345b8037b15465df1fd4143ea6d21ac0}} 
+\index{matrix.c@{matrix.c}!mat\_zeros@{mat\_zeros}}
+\index{mat\_zeros@{mat\_zeros}!matrix.c@{matrix.c}}
+\doxysubsubsection{mat\_zeros()}
+{\footnotesize\ttfamily int mat\+\_\+zeros (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n,  }\item[{size\+\_\+t}]{m,  }\item[{double $\ast$}]{mat }\end{DoxyParamCaption})}
+
+Sets to zero all the elements of n-\/by-\/m matrix mat \begin{DoxyReturn}{Returns}
+1 if succeed, 0 instead.
+\end{DoxyReturn}

@@ -1,0 +1,42 @@
+.TH "src/jacobi.c" 3 "Sat Feb 20 2021" "Symmetric matrix eigenvalues calculation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/jacobi.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'inclusions\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "size_t \fBjacobi\fP (size_t n, double(*M)[n])"
+.br
+.RI "Finds the eigenvalues of symmetric matrix M by Jacobi's method\&. See \fBmatrix\&.c\fP and \fBinclusions\&.h\fP files for descriptions of the functions used in this code\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "size_t jacobi (size_t n, double(*) M[n])"
+
+.PP
+Finds the eigenvalues of symmetric matrix M by Jacobi's method\&. See \fBmatrix\&.c\fP and \fBinclusions\&.h\fP files for descriptions of the functions used in this code\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIn\fP dimension of the square matrix 
+.br
+\fIM\fP symmetric matrix 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Niteration the number of iterations 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Symmetric matrix eigenvalues calculation from the source code\&.

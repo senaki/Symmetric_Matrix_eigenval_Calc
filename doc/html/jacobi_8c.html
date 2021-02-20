@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Symmetric Matrix Eigenvalues Calculation: jacobi.c File Reference</title>
+<title>Symmetric matrix eigenvalues calculation: src/jacobi.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Symmetric Matrix Eigenvalues Calculation
+   <div id="projectname">Symmetric matrix eigenvalues calculation
    </div>
    <div id="projectbrief">Performs eigenvalues calculation by Jacobi&#39;s method</div>
   </td>
@@ -60,6 +60,10 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -72,13 +76,13 @@ $(function() {
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0c6592d06cf7815a6ea19cfb3ef78d74"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jacobi_8c.html#a0c6592d06cf7815a6ea19cfb3ef78d74">jacobi</a> (size_t n, const double *M, double *sp)</td></tr>
-<tr class="memdesc:a0c6592d06cf7815a6ea19cfb3ef78d74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the eigenvalues of symmetric matrix M by Jacobi's method. See <a class="el" href="matrix_8c.html">matrix.c</a> and <a class="el" href="inclusions_8h.html">inclusions.h</a> files for descriptions of the functions used in this code.  <a href="jacobi_8c.html#a0c6592d06cf7815a6ea19cfb3ef78d74">More...</a><br /></td></tr>
-<tr class="separator:a0c6592d06cf7815a6ea19cfb3ef78d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3d88bd9142236c6e47e4d80fe401cec"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jacobi_8c.html#aa3d88bd9142236c6e47e4d80fe401cec">jacobi</a> (size_t n, double(*M)[n])</td></tr>
+<tr class="memdesc:aa3d88bd9142236c6e47e4d80fe401cec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the eigenvalues of symmetric matrix M by Jacobi's method. See <a class="el" href="matrix_8c.html">matrix.c</a> and <a class="el" href="inclusions_8h.html">inclusions.h</a> files for descriptions of the functions used in this code.  <a href="jacobi_8c.html#aa3d88bd9142236c6e47e4d80fe401cec">More...</a><br /></td></tr>
+<tr class="separator:aa3d88bd9142236c6e47e4d80fe401cec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a0c6592d06cf7815a6ea19cfb3ef78d74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c6592d06cf7815a6ea19cfb3ef78d74">&#9670;&nbsp;</a></span>jacobi()</h2>
+<a id="aa3d88bd9142236c6e47e4d80fe401cec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3d88bd9142236c6e47e4d80fe401cec">&#9670;&nbsp;</a></span>jacobi()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -92,14 +96,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>M</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>sp</em>&#160;</td>
+          <td class="paramtype">double(*)&#160;</td>
+          <td class="paramname"><em>M</em>[n]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -114,7 +112,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">n</td><td>dimension of the square matrix </td></tr>
     <tr><td class="paramname">M</td><td>symmetric matrix </td></tr>
-    <tr><td class="paramname">sp</td><td>sp stores eigenvalues of M </td></tr>
   </table>
   </dd>
 </dl>

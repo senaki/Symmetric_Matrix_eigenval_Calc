@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Symmetric Matrix Eigenvalues Calculation: main.c File Reference</title>
+<title>Symmetric matrix eigenvalues calculation: src/main.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Symmetric Matrix Eigenvalues Calculation
+   <div id="projectname">Symmetric matrix eigenvalues calculation
    </div>
    <div id="projectbrief">Performs eigenvalues calculation by Jacobi&#39;s method</div>
   </td>
@@ -60,6 +60,10 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -76,43 +80,14 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:aed1337d2f15a112a5783239c4d1b7b86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aed1337d2f15a112a5783239c4d1b7b86">welcom_msg</a> (const char *<a class="el" href="main_8c.html#a4a0cb8abf361ccf70b2f88ce057b5077">msg</a>)</td></tr>
 <tr class="separator:aed1337d2f15a112a5783239c4d1b7b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
-<tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a4a0cb8abf361ccf70b2f88ce057b5077"><td class="memItemLeft" align="right" valign="top">const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a4a0cb8abf361ccf70b2f88ce057b5077">msg</a> [] =&quot;Eigen values of symmetric matrices calculated by the Jacobi's algorithm&quot;</td></tr>
+<tr class="memdesc:a4a0cb8abf361ccf70b2f88ce057b5077"><td class="mdescLeft">&#160;</td><td class="mdescRight">This code calculates eigenvalues of symmetric square matrices by Jacobi's algorithm.  <a href="main_8c.html#a4a0cb8abf361ccf70b2f88ce057b5077">More...</a><br /></td></tr>
 <tr class="separator:a4a0cb8abf361ccf70b2f88ce057b5077"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a0ddf1224851353fc92bfbff6f499fa97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&nbsp;</a></span>main()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>argv</em>[]&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="aed1337d2f15a112a5783239c4d1b7b86"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aed1337d2f15a112a5783239c4d1b7b86">&#9670;&nbsp;</a></span>welcom_msg()</h2>
 
@@ -143,6 +118,19 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This code calculates eigenvalues of symmetric square matrices by Jacobi's algorithm. </p>
+<dl class="section author"><dt>Author</dt><dd>Serge Kiki</dd></dl>
+<p>This code calculates eigenvalues of symmetric square matrices by Jacobi's algorithm.</p>
+<p>Usage : rotjacobi arg1 arg2</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arg1</td><td>: input file with dim in the first ROW and the matrix element in the following </td></tr>
+    <tr><td class="paramname">arg2</td><td>: output path where the eigenvalues file will be created </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Do not use it for matrix wih dimension greater than 500 : possible memory issue ! </dd></dl>
 
 </div>
 </div>

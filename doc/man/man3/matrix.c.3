@@ -1,0 +1,49 @@
+.TH "src/matrix.c" 3 "Sat Feb 20 2021" "Symmetric matrix eigenvalues calculation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/matrix.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'inclusions\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "double(* \fBmat_eye\fP (const size_t dim))[]"
+.br
+.ti -1c
+.RI "int \fBmat_zeros\fP (size_t n, size_t m, double *mat)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "double(* mat_eye (const size_t dim))[]"
+Returns the square Identy matrix of dimension dim 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdim\fP : the dimension of the matrix 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Return a pointer to a dim-by-dim matrix M[dim][dim] dynamically allocated\&. The pointer type is : (double *)[dim]
+.RE
+.PP
+
+.SS "int mat_zeros (size_t n, size_t m, double * mat)"
+Sets to zero all the elements of n-by-m matrix mat 
+.PP
+\fBReturns\fP
+.RS 4
+1 if succeed, 0 instead\&.
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Symmetric matrix eigenvalues calculation from the source code\&.

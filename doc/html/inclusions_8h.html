@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Symmetric Matrix Eigenvalues Calculation: inclusions.h File Reference</title>
+<title>Symmetric matrix eigenvalues calculation: src/inclusions.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Symmetric Matrix Eigenvalues Calculation
+   <div id="projectname">Symmetric matrix eigenvalues calculation
    </div>
    <div id="projectbrief">Performs eigenvalues calculation by Jacobi&#39;s method</div>
   </td>
@@ -60,6 +60,10 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -86,7 +90,7 @@ Macros</h2></td></tr>
 <tr class="separator:a369266c24eacffb87046522897a570d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e817f47bf01a5a48982c5eb41446c4f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a7e817f47bf01a5a48982c5eb41446c4f">INCLUSIONS_H_INCLUDED</a></td></tr>
 <tr class="separator:a7e817f47bf01a5a48982c5eb41446c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8624969d4fe8e65e0f73a3acc71fd1a5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a8624969d4fe8e65e0f73a3acc71fd1a5">author</a>&#160;&#160;&#160;&quot;SERGE KIKI&quot;</td></tr>
+<tr class="memitem:a8624969d4fe8e65e0f73a3acc71fd1a5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a8624969d4fe8e65e0f73a3acc71fd1a5">author</a>&#160;&#160;&#160;&quot;Serge NKS&quot;</td></tr>
 <tr class="separator:a8624969d4fe8e65e0f73a3acc71fd1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a156b862ebf6d213f5da19b9e3ccb779e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a156b862ebf6d213f5da19b9e3ccb779e">TOL</a>&#160;&#160;&#160;1E-6</td></tr>
 <tr class="separator:a156b862ebf6d213f5da19b9e3ccb779e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -99,17 +103,17 @@ Functions</h2></td></tr>
 <tr class="separator:ada2589940401389c75425d0cd7441789"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a894c9dc7d87ddcf69425b414c340fd8d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a894c9dc7d87ddcf69425b414c340fd8d">mat_write</a> (size_t n, size_t m, const double *a, FILE *stream)</td></tr>
 <tr class="separator:a894c9dc7d87ddcf69425b414c340fd8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0eca016033facf4232af2564f16a7bba"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a0eca016033facf4232af2564f16a7bba">jacobi</a> (size_t n, const double *m, double *outEigVal)</td></tr>
-<tr class="memdesc:a0eca016033facf4232af2564f16a7bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the eigenvalues of symmetric matrix M by Jacobi's method. See <a class="el" href="matrix_8c.html">matrix.c</a> and <a class="el" href="inclusions_8h.html">inclusions.h</a> files for descriptions of the functions used in this code.  <a href="inclusions_8h.html#a0eca016033facf4232af2564f16a7bba">More...</a><br /></td></tr>
-<tr class="separator:a0eca016033facf4232af2564f16a7bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40a9fb97b762b5729e2bf00f1a85619f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a40a9fb97b762b5729e2bf00f1a85619f">jacobi</a> (size_t n, double(*m)[n])</td></tr>
+<tr class="memdesc:a40a9fb97b762b5729e2bf00f1a85619f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the eigenvalues of symmetric matrix M by Jacobi's method. See <a class="el" href="matrix_8c.html">matrix.c</a> and <a class="el" href="inclusions_8h.html">inclusions.h</a> files for descriptions of the functions used in this code.  <a href="inclusions_8h.html#a40a9fb97b762b5729e2bf00f1a85619f">More...</a><br /></td></tr>
+<tr class="separator:a40a9fb97b762b5729e2bf00f1a85619f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb13ba21331fcf9b62962e0400e3cfa4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#abb13ba21331fcf9b62962e0400e3cfa4">IsSym</a> (size_t n, const double *in)</td></tr>
 <tr class="separator:abb13ba21331fcf9b62962e0400e3cfa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afffdc6d52699bf181dd2bfd3972a3e8d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#afffdc6d52699bf181dd2bfd3972a3e8d">IsOrtho</a> (size_t n, const double *in)</td></tr>
 <tr class="separator:afffdc6d52699bf181dd2bfd3972a3e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad48400d0d1026af24c42134587ebba16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#ad48400d0d1026af24c42134587ebba16">transpose</a> (size_t nrow, size_t ncol, const double *A, double *out)</td></tr>
 <tr class="separator:ad48400d0d1026af24c42134587ebba16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c4b2deefc869ed1f8593bcc37566cba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a4c4b2deefc869ed1f8593bcc37566cba">Cross</a> (size_t Anrow, size_t Bnrow, size_t Ancol, size_t Nncol, const double *restrict A, const double *restrict B, double *restrict C)</td></tr>
-<tr class="separator:a4c4b2deefc869ed1f8593bcc37566cba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad79d639bdd3f333ad7df4270ecdac412"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#ad79d639bdd3f333ad7df4270ecdac412">Cross</a> (size_t Anrow, size_t Bnrow, size_t Ancol, size_t Nncol, const double *A, const double *B, double *C)</td></tr>
+<tr class="separator:ad79d639bdd3f333ad7df4270ecdac412"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc00f8f3cd575310c647deff59048bb1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#adc00f8f3cd575310c647deff59048bb1">mat_sum</a> (size_t n, const double *a, const double *b, double *out)</td></tr>
 <tr class="separator:adc00f8f3cd575310c647deff59048bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a345b8037b15465df1fd4143ea6d21ac0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a345b8037b15465df1fd4143ea6d21ac0">mat_zeros</a> (size_t n, size_t m, double *mat)</td></tr>
@@ -153,7 +157,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define author&#160;&#160;&#160;&quot;SERGE KIKI&quot;</td>
+          <td class="memname">#define author&#160;&#160;&#160;&quot;Serge NKS&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -189,8 +193,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a4c4b2deefc869ed1f8593bcc37566cba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c4b2deefc869ed1f8593bcc37566cba">&#9670;&nbsp;</a></span>Cross()</h2>
+<a id="ad79d639bdd3f333ad7df4270ecdac412"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad79d639bdd3f333ad7df4270ecdac412">&#9670;&nbsp;</a></span>Cross()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,7 +203,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Cross </td>
+          <td class="memname">int Cross </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>Anrow</em>, </td>
@@ -225,19 +229,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double *restrict&#160;</td>
+          <td class="paramtype">const double *&#160;</td>
           <td class="paramname"><em>A</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double *restrict&#160;</td>
+          <td class="paramtype">const double *&#160;</td>
           <td class="paramname"><em>B</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double *restrict&#160;</td>
+          <td class="paramtype">double *&#160;</td>
           <td class="paramname"><em>C</em>&#160;</td>
         </tr>
         <tr>
@@ -252,7 +256,7 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Calculates the cross product of the A by B and put the result into C. Their dimension must agree.</p>
+<p>Calculates the cross product of the A by B A*B=C and put the result into C. Their dimension must agree. c(i,j)=sum( a(i,k)*b(k,j)), 1&lt;k&lt;a_nrow and a_ncol == b_nrow C is a_nrow-by-b_ncol matrix</p>
 
 </div>
 </div>
@@ -322,8 +326,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0eca016033facf4232af2564f16a7bba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0eca016033facf4232af2564f16a7bba">&#9670;&nbsp;</a></span>jacobi()</h2>
+<a id="a40a9fb97b762b5729e2bf00f1a85619f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40a9fb97b762b5729e2bf00f1a85619f">&#9670;&nbsp;</a></span>jacobi()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -337,14 +341,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>M</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>sp</em>&#160;</td>
+          <td class="paramtype">double(*)&#160;</td>
+          <td class="paramname"><em>M</em>[n]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -359,7 +357,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">n</td><td>dimension of the square matrix </td></tr>
     <tr><td class="paramname">M</td><td>symmetric matrix </td></tr>
-    <tr><td class="paramname">sp</td><td>sp stores eigenvalues of M </td></tr>
   </table>
   </dd>
 </dl>

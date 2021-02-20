@@ -1,0 +1,215 @@
+.TH "src/inclusions.h" 3 "Sat Feb 20 2021" "Symmetric matrix eigenvalues calculation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/inclusions.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <libgen\&.h>\fP
+.br
+\fC#include <stddef\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_POSIX_C_SOURCE\fP   200809L"
+.br
+.ti -1c
+.RI "#define \fB_GNU_SOURCE\fP"
+.br
+.ti -1c
+.RI "#define \fBINCLUSIONS_H_INCLUDED\fP"
+.br
+.ti -1c
+.RI "#define \fBauthor\fP   'Serge NKS'"
+.br
+.ti -1c
+.RI "#define \fBTOL\fP   1E\-6"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBstrdup\fP (const char *)"
+.br
+.ti -1c
+.RI "int \fBmat_print\fP (size_t n, size_t m, const double *in)"
+.br
+.ti -1c
+.RI "int \fBmat_write\fP (size_t n, size_t m, const double *a, FILE *stream)"
+.br
+.ti -1c
+.RI "size_t \fBjacobi\fP (size_t n, double(*m)[n])"
+.br
+.RI "Finds the eigenvalues of symmetric matrix M by Jacobi's method\&. See \fBmatrix\&.c\fP and \fBinclusions\&.h\fP files for descriptions of the functions used in this code\&. "
+.ti -1c
+.RI "int \fBIsSym\fP (size_t n, const double *in)"
+.br
+.ti -1c
+.RI "int \fBIsOrtho\fP (size_t n, const double *in)"
+.br
+.ti -1c
+.RI "void \fBtranspose\fP (size_t nrow, size_t ncol, const double *A, double *out)"
+.br
+.ti -1c
+.RI "int \fBCross\fP (size_t Anrow, size_t Bnrow, size_t Ancol, size_t Nncol, const double *A, const double *B, double *C)"
+.br
+.ti -1c
+.RI "void \fBmat_sum\fP (size_t n, const double *a, const double *b, double *out)"
+.br
+.ti -1c
+.RI "int \fBmat_zeros\fP (size_t n, size_t m, double *mat)"
+.br
+.ti -1c
+.RI "double(* \fBmat_eye\fP (const size_t dim))[]"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define _GNU_SOURCE"
+
+.SS "#define _POSIX_C_SOURCE   200809L"
+
+.SS "#define author   'Serge NKS'"
+
+.SS "#define INCLUSIONS_H_INCLUDED"
+
+.SS "#define TOL   1E\-6"
+
+.SH "Function Documentation"
+.PP 
+.SS "int Cross (size_t Anrow, size_t Bnrow, size_t Ancol, size_t Nncol, const double * A, const double * B, double * C)\fC [inline]\fP"
+Calculates the cross product of the A by B A*B=C and put the result into C\&. Their dimension must agree\&. c(i,j)=sum( a(i,k)*b(k,j)), 1<k<a_nrow and a_ncol == b_nrow C is a_nrow-by-b_ncol matrix
+.SS "int IsOrtho (size_t n, const double * in)"
+Checks if the matrix in is orthogonal
+.PP
+\fBReturns\fP
+.RS 4
+1 if true, 0 instead
+.RE
+.PP
+
+.SS "int IsSym (size_t n, const double * in)"
+Checks if the matrix in is symmetric
+.PP
+\fBParameters\fP
+.RS 4
+\fInrow,ncol\fP number of row and column 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 if success, otherwise -1
+.RE
+.PP
+
+.SS "jacobi (size_t n, double(*) M[n])"
+
+.PP
+Finds the eigenvalues of symmetric matrix M by Jacobi's method\&. See \fBmatrix\&.c\fP and \fBinclusions\&.h\fP files for descriptions of the functions used in this code\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIn\fP dimension of the square matrix 
+.br
+\fIM\fP symmetric matrix 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Niteration the number of iterations 
+.RE
+.PP
+
+.SS "double(* mat_eye (const size_t dim))[]"
+Returns the square Identy matrix of dimension dim 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdim\fP : the dimension of the matrix 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Return a pointer to a dim-by-dim matrix M[dim][dim] dynamically allocated\&. The pointer type is : (double *)[dim]
+.RE
+.PP
+
+.SS "int mat_print (size_t n, size_t m, const double * in)"
+Prints a nrow-by-nrow matrix to the screen
+.PP
+\fBParameters\fP
+.RS 4
+\fIn\fP number of row 
+.br
+\fIm\fP number of column 
+.br
+\fI*mat\fP matrix reference
+.RE
+.PP
+
+.SS "void mat_sum (size_t n, const double * a, const double * b, double * out)"
+Sums two square matrices a and b and write the output into out matrix\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIn\fP matrix dimension 
+.br
+\fIa\fP matrix 
+.br
+\fIb\fP matrix 
+.br
+\fIout\fP output matrix
+.RE
+.PP
+
+.SS "int mat_write (size_t n, size_t m, const double * a, FILE * stream)"
+Writes a nxm matrix into a file
+.PP
+\fBParameters\fP
+.RS 4
+\fIfilename\fP 
+.br
+\fIn\fP number of row 
+.br
+\fIm\fP number of column 
+.br
+\fI*mat\fP matrix reference 
+.br
+\fI*stream\fP valid stream pointer where output is written 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+-1 if an error occurred, 0 instead
+.RE
+.PP
+
+.SS "int mat_zeros (size_t n, size_t m, double * mat)"
+Sets to zero all the elements of n-by-m matrix mat 
+.PP
+\fBReturns\fP
+.RS 4
+1 if succeed, 0 instead\&.
+.RE
+.PP
+
+.SS "char* strdup (const char *)"
+
+.SS "void transpose (size_t nrow, size_t ncol, const double * A, double * out)"
+Calculates the transpose of a nrow-by-ncol matrix A and put it in the matrix ncol-by-nrow A and out must be declared agree with the the dimension
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Symmetric matrix eigenvalues calculation from the source code\&.

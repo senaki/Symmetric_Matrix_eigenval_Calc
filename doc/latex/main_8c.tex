@@ -1,0 +1,53 @@
+\doxysection{src/main.c File Reference}
+\label{main_8c}\index{src/main.c@{src/main.c}}
+{\ttfamily \#include \char`\"{}inclusions.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ welcom\+\_\+msg} (const char $\ast$\textbf{ msg})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char \textbf{ msg} [$\,$] =\char`\"{}Eigen values of symmetric matrices calculated by the Jacobi\textquotesingle{}s algorithm\char`\"{}
+\begin{DoxyCompactList}\small\item\em This code calculates eigenvalues of symmetric square matrices by Jacobi\textquotesingle{}s algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{main_8c_aed1337d2f15a112a5783239c4d1b7b86}} 
+\index{main.c@{main.c}!welcom\_msg@{welcom\_msg}}
+\index{welcom\_msg@{welcom\_msg}!main.c@{main.c}}
+\doxysubsubsection{welcom\_msg()}
+{\footnotesize\ttfamily void welcom\+\_\+msg (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{main_8c_a4a0cb8abf361ccf70b2f88ce057b5077}} 
+\index{main.c@{main.c}!msg@{msg}}
+\index{msg@{msg}!main.c@{main.c}}
+\doxysubsubsection{msg}
+{\footnotesize\ttfamily const char msg[$\,$] =\char`\"{}Eigen values of symmetric matrices calculated by the Jacobi\textquotesingle{}s algorithm\char`\"{}}
+
+
+
+This code calculates eigenvalues of symmetric square matrices by Jacobi\textquotesingle{}s algorithm. 
+
+\begin{DoxyAuthor}{Author}
+Serge Kiki
+\end{DoxyAuthor}
+This code calculates eigenvalues of symmetric square matrices by Jacobi\textquotesingle{}s algorithm.
+
+Usage \+: rotjacobi arg1 arg2
+
+
+\begin{DoxyParams}{Parameters}
+{\em arg1} & \+: input file with dim in the first ROW and the matrix element in the following \\
+\hline
+{\em arg2} & \+: output path where the eigenvalues file will be created \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Do not use it for matrix wih dimension greater than 500 \+: possible memory issue ! 
+\end{DoxyNote}
