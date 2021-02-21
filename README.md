@@ -15,10 +15,10 @@ Example :  `rotjacobi ./test.dat ./`
 
 Output :  
 
-    Processing /path/to/inputfile.dat took : XXXX ms | XXXX rotations
+    /path/to/inputfile Dim=%u Rotations=%lu Duration=%ld ms
 
 ## Input file structure
-The first line contains the matrix dimension *n*.
+The first line contains the matrix dimension n.
 The following lines contain the matrix elements separated by a blank (white space or tabulation).
 The matrix row ends with a newline character.
 ### Example of input file
@@ -32,15 +32,11 @@ The matrix row ends with a newline character.
 ### Header
 There are 2 lines of header, each terminated by a newline character.
 The header start with # followed by one space.
-The header consits of :
+The header consists of :
 
-        # total iteration : _number of Jacobi's rotations_
-        # matrix dimension : *n* x *1*
-        y_1
-        .
-        .
-        .
-        y_n
+        # total iteration : number of Jacobi's rotations
+        # matrix dimension : n x 1
+        y_1 ... y_n
 
 where y_n is the n-th eigenvalue.
 
