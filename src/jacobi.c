@@ -17,16 +17,13 @@ size_t jacobi(size_t n, double (*M)[n])
   idx[2] <=> column
   */
   double theta=.0, max_mat,
-  (*mR)[n]=(double (*)[n]) calloc(n, sizeof(double[n])),
-  (*mTr)[n]=(double (*)[n]) calloc(n, sizeof(double[n])),
-  (*vP)[n]=(double (*)[n]) calloc(n, sizeof(double[n]));
+  (*mR)[n]=(double (*)[n])malloc(n*sizeof(double[n])),
+  (*mTr)[n]=(double (*)[n])malloc(n*sizeof(double[n])),
+  (*vP)[n]=(double (*)[n])malloc(n*sizeof(double[n]));
+  memset(mR,0,n*sizeof(double[n]));
   for( i=0 ; i < n; i++ )
   {
     mR[i][i]=1.0;
-    for( j=i+1 ; j < n ; j++ )
-    {
-      mR[i][j] = mR[j][i] = 0.;
-    }
   }
   /*
   mR is the matrix of rotation
@@ -57,16 +54,12 @@ size_t jacobi(size_t n, double (*M)[n])
     mR[idx[0]][idx[1]] = sin(theta) ;
     mR[idx[1]][idx[0]] = -1*sin(theta) ;
     /*
-    Transpose mR -> mTr
+    1-Transpose mR -> mTr
+    2-Left Multiply mTr by M -> vP
+    3-Right Multply vP by mR -> M
     */
     transpose(n, n, &mR[0][0], &mTr[0][0]);
-    /*
-     Left Multiply mTr by M -> vP
-   */
     Cross(n, n, n, n, &mTr[0][0], &M[0][0], &vP[0][0] );
-    /*
-    Right Multply vP by mR -> M
-    */
     Cross(n, n, n, n, &vP[0][0], &mR[0][0], &M[0][0]);
     Niteration++ ;
     /*
@@ -77,10 +70,10 @@ size_t jacobi(size_t n, double (*M)[n])
     mR[ idx[0] ][ idx[1] ] = 0;
     mR[ idx[1] ][ idx[0] ] = 0;
     if (Niteration > 1e4 ) {
-      fprintf(stderr, "Warninng : too much iteration. The method is not adapted to your need !\n");
+      fprintf(stderr, "Warning : too much iteration. The method is not adapted to your need !\n");
       break;
     }
   } while( max_mat > TOL);
-  free(mR), free(mTr), free(vP);
+  free(mR);  free(mTr);  free(vP);
   return Niteration ;
 }

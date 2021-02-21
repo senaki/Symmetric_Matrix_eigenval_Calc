@@ -3,7 +3,7 @@
 #ifndef INCLUSIONS_H_INCLUDED
 #define INCLUSIONS_H_INCLUDED
 #define author "Serge NKS"
-#define TOL 1E-6
+#define TOL 1e-5
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -11,6 +11,7 @@
 #include <libgen.h>
 #include <stddef.h>
 extern char *strdup(const char *);
+extern void *alloca(size_t size);
 //from an array
 extern int mat_print(size_t n, size_t m, const double *in);
 //from a file

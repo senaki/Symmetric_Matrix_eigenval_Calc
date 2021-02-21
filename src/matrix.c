@@ -1,5 +1,5 @@
 #include "inclusions.h"
-int mat_write(size_t n, size_t m, const double *a, FILE* stream )
+int mat_write(size_t n, size_t m, const double *mat, FILE* stream )
 {
   /**
   \brief Writes a nxm matrix into a file \param filename
@@ -19,14 +19,13 @@ int mat_write(size_t n, size_t m, const double *a, FILE* stream )
 	fprintf( stream, "# matrix size : %lu x %lu\n", n, m);
    	for( size_t i=0 ; i < n ; i++ ){
 			for( size_t j=0 ; j < m ; j++ ) {
-				fprintf(stream, "%07.4lf%c", a[i*n + j], (n==1 || m==1)? '\n':'\t') ;
+				fprintf(stream, "%.4lf\t", mat[i*m + j]) ;
 			}
-			if ( i < n-1 ) fputc('\n', stream );
+			fputc('\n', stream ) ;
     }
 		return 0 ;
 }
-
-int mat_print(size_t n, size_t m, const double *in)
+int mat_print(size_t n, size_t m, const double *mat)
 {
 	/**
 	\brief Prints a nrow-by-nrow matrix to the screen
@@ -36,20 +35,19 @@ int mat_print(size_t n, size_t m, const double *in)
 	\param *mat matrix reference
 	*/
 	size_t i,j;
-	if(in == NULL){
+	if(mat == NULL){
 		fputs("You provided a null pointer", stderr);
 		return -1;
 	}
 	puts("[");
 	for(i=0; i < n; i++)
 	{
-		for( j=0 ; j< m ; j++ )  printf("%.4lf\t", in[i*n +j]);
+		for( j=0 ; j< m ; j++ )  printf("%.4lf\t", mat[i*m + j]);
 		putchar('\n') ;
 	}
 	puts("]");
 	return 0;
 }
-
 int IsSym( size_t n, const double *in )
 {
   /**
@@ -72,9 +70,6 @@ int IsSym( size_t n, const double *in )
   }
   return 1 ;
 }
-
-//--
-//--
 void mat_sum(size_t n, const double *a, const double *b, double *out)
 {
   /**
@@ -103,7 +98,6 @@ void transpose(size_t nrow, size_t ncol, const double *A, double *out)
     for(size_t j=0; j<ncol; j++) *(out + j*nrow +i)=*(A +i*ncol +j);
   }
 }
-
 inline int Cross(
 	size_t a_nrow,
 	size_t b_nrow,
@@ -135,7 +129,6 @@ inline int Cross(
 		}
 		return 1;
 	}
-
 int IsOrtho(size_t n, const double *in)
 {
   /**
@@ -162,9 +155,8 @@ double (*mat_eye(const size_t dim))[]
 	\return Return a pointer to a dim-by-dim matrix M[dim][dim] dynamically allocated.
 	The pointer type is : (double *)[dim]
   */
-  if (dim<2) return NULL;
 	static double (*M)[dim]=NULL;
-  M=(double (*)[dim]) calloc(dim, sizeof(double[dim]));
+	M=(double (*)[dim]) calloc(dim*dim, sizeof(double));
   for(size_t i=0 ; i < dim ; i++)
    {
      M[i][i]=1.0;
@@ -179,9 +171,6 @@ int mat_zeros(size_t n, size_t m, double *mat)
   */
 	if(mat==NULL) return -1;
 	if((n<1)||(m<1)) return 0;
-  for(size_t i=0 ; i < n ; i++)
-   {
-		 for(size_t j=0 ; j < m ; j++) mat[i*n + j]=0.;
-   }
-   return 1;
+	memset(mat, 0, n*m*sizeof(double));
+  return 1;
 }

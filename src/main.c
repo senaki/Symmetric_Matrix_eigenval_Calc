@@ -17,7 +17,7 @@ void welcom_msg(const char *msg){
 	size_t msgLen = strlen(msg), i ;
 	printf("\033[33m") ;
 	for ( i=0 ; i < msgLen ; i++ ) printf("*") ;
-	printf("\n%s\n%s\n", msg, author) ;
+	printf("\n%s\n", msg) ;
 	for ( i=0 ; i < msgLen ; i++ ) printf("*") ;
 	printf("\033[0m\n") ;
 }
@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
 	FILE *fidFLAG;
 	int status;
 	unsigned int FLAG=0;;
-
 	if ( (fidFLAG=fopen(".flag","r+")) == NULL ){
 		fidFLAG=fopen(".flag", "w+");
 		welcom_msg( msg );//Message d'accueil
@@ -50,22 +49,18 @@ int main(int argc, char *argv[])
 	char *inputFName=strdup(argv[1]),//duplique argv
 	*inFName=basename(inputFName), //extrait le nom de fichier
 	*eigValueFName=strdup(argv[2]);
-	strcat(strcat(eigValueFName,"eigval_"), inFName);
+	eigValueFName=strcat(strcat(eigValueFName,"eigval_"), inFName);
 	//-------------------------------
 	FILE *flux = fopen( inputFName, "r" );
 	if( flux == NULL ){
 		fprintf(stderr,"The input file does not open for reading\n");
 		exit(EXIT_FAILURE);
 	}
-	/**
-	\var dim
-	\brief Matrix dimension
-	\var M
-	\brief Matrix
-	*/
+	/***********************************************
+	************************************************/
 	unsigned int dim = 2;
 	status = fscanf( flux, "%u", &dim ) ;
-	double (*M)[dim] = (double (*)[dim]) calloc(dim, sizeof(double[dim]) );
+	double (*M)[dim] = (double (*)[dim])calloc(dim,sizeof(double[dim]));
 	if (M == NULL) {
 		fprintf(stderr, "Error : cannot allocate memory\n");
 		return EXIT_FAILURE ;
@@ -80,8 +75,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr,"This matrix is not symmetric\n");
 		exit(EXIT_FAILURE) ;
 	}
-	/*
-		Calculate eigenvalues with Jacobi rotation : J(dim, M)
+	/*	Calculate eigenvalues with Jacobi rotation : J(dim, M)
 	*/
 	double *eigVal=(double *)calloc(dim, sizeof(double)); // Eigenvalues vector
 	clock_t start, end; // Measurement of duration
@@ -91,17 +85,17 @@ int main(int argc, char *argv[])
 	for( i=0 ; i < dim ; i++){
 		eigVal[i]= M[i][i] ;
 	}
-	free(M);
-	/*
-	 Save the eigenvalues
+	/*	Save the eigenvalues
 	*/
 	FILE *fout=fopen(eigValueFName, "w");
 	fprintf( fout, "# total iteration : %03lu\n", Niteration ) ;
 	mat_write(1, dim, eigVal, fout);
 	fclose(fout) ;
-	printf("\033[31mProcessing %s took : ", inputFName);
-	printf("%ld ms | %lu rotation%c\033[0m\n",
-	(end-start)*1000/CLOCKS_PER_SEC, Niteration, (Niteration>1)?'s':' ');
-
+	printf("\033[31m%s\tDim=%u\tRotations=%lu\tDuration=%ld ms\033[0m\n",
+	inputFName,
+	dim,
+	Niteration,
+	(end-start)*1000/CLOCKS_PER_SEC);
+	free(M);free(eigVal);	free(inputFName); 	free(inFName);	free(eigValueFName);
 	return EXIT_SUCCESS;
 }
