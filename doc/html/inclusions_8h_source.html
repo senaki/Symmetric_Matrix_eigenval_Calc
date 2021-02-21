@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -46,6 +50,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('inclusions_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">inclusions.h</div>  </div>
@@ -75,7 +91,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#ifndef INCLUSIONS_H_INCLUDED</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="inclusions_8h.html#a7e817f47bf01a5a48982c5eb41446c4f">    4</a></span>&#160;<span class="preprocessor">#define INCLUSIONS_H_INCLUDED</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="inclusions_8h.html#a8624969d4fe8e65e0f73a3acc71fd1a5">    5</a></span>&#160;<span class="preprocessor">#define author &quot;Serge NKS&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="inclusions_8h.html#a156b862ebf6d213f5da19b9e3ccb779e">    6</a></span>&#160;<span class="preprocessor">#define TOL 1E-6</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="inclusions_8h.html#a156b862ebf6d213f5da19b9e3ccb779e">    6</a></span>&#160;<span class="preprocessor">#define TOL 1e-5</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;math.h&gt;</span></div>
@@ -83,36 +99,42 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;libgen.h&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="inclusions_8h.html#a5b35572f751b50eef956a2d054ee48c0">   13</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">char</span> *<a class="code" href="inclusions_8h.html#a5b35572f751b50eef956a2d054ee48c0">strdup</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//from an array</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="inclusions_8h.html#ada2589940401389c75425d0cd7441789">mat_print</a>(<span class="keywordtype">size_t</span> n, <span class="keywordtype">size_t</span> m, <span class="keyword">const</span> <span class="keywordtype">double</span> *in);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//from a file</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="inclusions_8h.html#a894c9dc7d87ddcf69425b414c340fd8d">mat_write</a>( <span class="keywordtype">size_t</span> n, <span class="keywordtype">size_t</span> m, <span class="keyword">const</span>  <span class="keywordtype">double</span> *a, FILE *stream );</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//extern size_t jacobi(size_t n, const double *m, double *outEigVal, double *outEigVec); Next release</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">size_t</span> <a class="code" href="inclusions_8h.html#a40a9fb97b762b5729e2bf00f1a85619f">jacobi</a>(<span class="keywordtype">size_t</span> n, <span class="keywordtype">double</span> (*m)[n]);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="inclusions_8h.html#abb13ba21331fcf9b62962e0400e3cfa4">IsSym</a>( <span class="keywordtype">size_t</span> n, <span class="keyword">const</span> <span class="keywordtype">double</span> *in);<span class="comment">//Check if the matrix is symmetric</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="inclusions_8h.html#afffdc6d52699bf181dd2bfd3972a3e8d">IsOrtho</a>(<span class="keywordtype">size_t</span> n, <span class="keyword">const</span> <span class="keywordtype">double</span> *in);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="inclusions_8h.html#ad48400d0d1026af24c42134587ebba16">transpose</a>(<span class="keywordtype">size_t</span> nrow, <span class="keywordtype">size_t</span> ncol, <span class="keyword">const</span> <span class="keywordtype">double</span> *A, <span class="keywordtype">double</span> *out);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="inclusions_8h.html#ad79d639bdd3f333ad7df4270ecdac412">Cross</a>(<span class="keywordtype">size_t</span> Anrow, <span class="keywordtype">size_t</span> Bnrow, <span class="keywordtype">size_t</span> Ancol, <span class="keywordtype">size_t</span> Nncol,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span> *A, <span class="keyword">const</span> <span class="keywordtype">double</span> *B, <span class="keywordtype">double</span> *C);<span class="comment">//matricial product</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="inclusions_8h.html#adc00f8f3cd575310c647deff59048bb1">mat_sum</a>(<span class="keywordtype">size_t</span> n, <span class="keyword">const</span> <span class="keywordtype">double</span> *a, <span class="keyword">const</span> <span class="keywordtype">double</span> *b, <span class="keywordtype">double</span> *out); <span class="comment">//matrix sum</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="inclusions_8h.html#a345b8037b15465df1fd4143ea6d21ac0">mat_zeros</a>(<span class="keywordtype">size_t</span> n, <span class="keywordtype">size_t</span> m, <span class="keywordtype">double</span> *mat) ;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">extern</span> double (*<a class="code" href="inclusions_8h.html#a64332b31c0ddb5cb8e039db69bc8045a">mat_eye</a>(<span class="keyword">const</span> <span class="keywordtype">size_t</span> dim))[] ;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//INCLUSIONS_H_INCLUDED</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="inclusions_8h.html#ac320aee47c6cca7c5402e629718efa85">   14</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> *<a class="code" href="inclusions_8h.html#ac320aee47c6cca7c5402e629718efa85">alloca</a>(<span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//from an array</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="inclusions_8h.html#ada2589940401389c75425d0cd7441789">mat_print</a>(<span class="keywordtype">size_t</span> n, <span class="keywordtype">size_t</span> m, <span class="keyword">const</span> <span class="keywordtype">double</span> *in);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//from a file</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="inclusions_8h.html#a894c9dc7d87ddcf69425b414c340fd8d">mat_write</a>( <span class="keywordtype">size_t</span> n, <span class="keywordtype">size_t</span> m, <span class="keyword">const</span>  <span class="keywordtype">double</span> *a, FILE *stream );</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//extern size_t jacobi(size_t n, const double *m, double *outEigVal, double *outEigVec); Next release</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">size_t</span> <a class="code" href="inclusions_8h.html#a40a9fb97b762b5729e2bf00f1a85619f">jacobi</a>(<span class="keywordtype">size_t</span> n, <span class="keywordtype">double</span> (*m)[n]);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="inclusions_8h.html#abb13ba21331fcf9b62962e0400e3cfa4">IsSym</a>( <span class="keywordtype">size_t</span> n, <span class="keyword">const</span> <span class="keywordtype">double</span> *in);<span class="comment">//Check if the matrix is symmetric</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="inclusions_8h.html#afffdc6d52699bf181dd2bfd3972a3e8d">IsOrtho</a>(<span class="keywordtype">size_t</span> n, <span class="keyword">const</span> <span class="keywordtype">double</span> *in);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="inclusions_8h.html#ad48400d0d1026af24c42134587ebba16">transpose</a>(<span class="keywordtype">size_t</span> nrow, <span class="keywordtype">size_t</span> ncol, <span class="keyword">const</span> <span class="keywordtype">double</span> *A, <span class="keywordtype">double</span> *out);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="inclusions_8h.html#ad79d639bdd3f333ad7df4270ecdac412">Cross</a>(<span class="keywordtype">size_t</span> Anrow, <span class="keywordtype">size_t</span> Bnrow, <span class="keywordtype">size_t</span> Ancol, <span class="keywordtype">size_t</span> Nncol,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">double</span> *A, <span class="keyword">const</span> <span class="keywordtype">double</span> *B, <span class="keywordtype">double</span> *C);<span class="comment">//matricial product</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="inclusions_8h.html#adc00f8f3cd575310c647deff59048bb1">mat_sum</a>(<span class="keywordtype">size_t</span> n, <span class="keyword">const</span> <span class="keywordtype">double</span> *a, <span class="keyword">const</span> <span class="keywordtype">double</span> *b, <span class="keywordtype">double</span> *out); <span class="comment">//matrix sum</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="inclusions_8h.html#a345b8037b15465df1fd4143ea6d21ac0">mat_zeros</a>(<span class="keywordtype">size_t</span> n, <span class="keywordtype">size_t</span> m, <span class="keywordtype">double</span> *mat) ;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">extern</span> double (*<a class="code" href="inclusions_8h.html#a64332b31c0ddb5cb8e039db69bc8045a">mat_eye</a>(<span class="keyword">const</span> <span class="keywordtype">size_t</span> dim))[] ;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//INCLUSIONS_H_INCLUDED</span></div>
 <div class="ttc" id="ainclusions_8h_html_a345b8037b15465df1fd4143ea6d21ac0"><div class="ttname"><a href="inclusions_8h.html#a345b8037b15465df1fd4143ea6d21ac0">mat_zeros</a></div><div class="ttdeci">int mat_zeros(size_t n, size_t m, double *mat)</div><div class="ttdef"><b>Definition:</b> matrix.c:174</div></div>
 <div class="ttc" id="ainclusions_8h_html_a40a9fb97b762b5729e2bf00f1a85619f"><div class="ttname"><a href="inclusions_8h.html#a40a9fb97b762b5729e2bf00f1a85619f">jacobi</a></div><div class="ttdeci">size_t jacobi(size_t n, double(*m)[n])</div><div class="ttdoc">Finds the eigenvalues of symmetric matrix M by Jacobi's method. See matrix.c and inclusions....</div><div class="ttdef"><b>Definition:</b> jacobi.c:10</div></div>
 <div class="ttc" id="ainclusions_8h_html_a5b35572f751b50eef956a2d054ee48c0"><div class="ttname"><a href="inclusions_8h.html#a5b35572f751b50eef956a2d054ee48c0">strdup</a></div><div class="ttdeci">char * strdup(const char *)</div></div>
-<div class="ttc" id="ainclusions_8h_html_a64332b31c0ddb5cb8e039db69bc8045a"><div class="ttname"><a href="inclusions_8h.html#a64332b31c0ddb5cb8e039db69bc8045a">mat_eye</a></div><div class="ttdeci">double(* mat_eye(const size_t dim))[]</div><div class="ttdef"><b>Definition:</b> matrix.c:157</div></div>
+<div class="ttc" id="ainclusions_8h_html_a64332b31c0ddb5cb8e039db69bc8045a"><div class="ttname"><a href="inclusions_8h.html#a64332b31c0ddb5cb8e039db69bc8045a">mat_eye</a></div><div class="ttdeci">double(* mat_eye(const size_t dim))[]</div><div class="ttdef"><b>Definition:</b> matrix.c:158</div></div>
 <div class="ttc" id="ainclusions_8h_html_a894c9dc7d87ddcf69425b414c340fd8d"><div class="ttname"><a href="inclusions_8h.html#a894c9dc7d87ddcf69425b414c340fd8d">mat_write</a></div><div class="ttdeci">int mat_write(size_t n, size_t m, const double *a, FILE *stream)</div><div class="ttdef"><b>Definition:</b> matrix.c:2</div></div>
 <div class="ttc" id="ainclusions_8h_html_abb13ba21331fcf9b62962e0400e3cfa4"><div class="ttname"><a href="inclusions_8h.html#abb13ba21331fcf9b62962e0400e3cfa4">IsSym</a></div><div class="ttdeci">int IsSym(size_t n, const double *in)</div><div class="ttdef"><b>Definition:</b> matrix.c:53</div></div>
+<div class="ttc" id="ainclusions_8h_html_ac320aee47c6cca7c5402e629718efa85"><div class="ttname"><a href="inclusions_8h.html#ac320aee47c6cca7c5402e629718efa85">alloca</a></div><div class="ttdeci">void * alloca(size_t size)</div></div>
 <div class="ttc" id="ainclusions_8h_html_ad48400d0d1026af24c42134587ebba16"><div class="ttname"><a href="inclusions_8h.html#ad48400d0d1026af24c42134587ebba16">transpose</a></div><div class="ttdeci">void transpose(size_t nrow, size_t ncol, const double *A, double *out)</div><div class="ttdef"><b>Definition:</b> matrix.c:94</div></div>
 <div class="ttc" id="ainclusions_8h_html_ad79d639bdd3f333ad7df4270ecdac412"><div class="ttname"><a href="inclusions_8h.html#ad79d639bdd3f333ad7df4270ecdac412">Cross</a></div><div class="ttdeci">int Cross(size_t Anrow, size_t Bnrow, size_t Ancol, size_t Nncol, const double *A, const double *B, double *C)</div><div class="ttdef"><b>Definition:</b> matrix.c:107</div></div>
 <div class="ttc" id="ainclusions_8h_html_ada2589940401389c75425d0cd7441789"><div class="ttname"><a href="inclusions_8h.html#ada2589940401389c75425d0cd7441789">mat_print</a></div><div class="ttdeci">int mat_print(size_t n, size_t m, const double *in)</div><div class="ttdef"><b>Definition:</b> matrix.c:29</div></div>
 <div class="ttc" id="ainclusions_8h_html_adc00f8f3cd575310c647deff59048bb1"><div class="ttname"><a href="inclusions_8h.html#adc00f8f3cd575310c647deff59048bb1">mat_sum</a></div><div class="ttdeci">void mat_sum(size_t n, const double *a, const double *b, double *out)</div><div class="ttdef"><b>Definition:</b> matrix.c:78</div></div>
 <div class="ttc" id="ainclusions_8h_html_afffdc6d52699bf181dd2bfd3972a3e8d"><div class="ttname"><a href="inclusions_8h.html#afffdc6d52699bf181dd2bfd3972a3e8d">IsOrtho</a></div><div class="ttdeci">int IsOrtho(size_t n, const double *in)</div><div class="ttdef"><b>Definition:</b> matrix.c:139</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="inclusions_8h.html">inclusions.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

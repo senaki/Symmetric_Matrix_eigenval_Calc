@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['jacobi_29',['jacobi',['../inclusions_8h.html#a40a9fb97b762b5729e2bf00f1a85619f',1,'jacobi(size_t n, double(*m)[n]):&#160;jacobi.c'],['../jacobi_8c.html#aa3d88bd9142236c6e47e4d80fe401cec',1,'jacobi(size_t n, double(*M)[n]):&#160;jacobi.c']]]
+  ['isortho_30',['IsOrtho',['../inclusions_8h.html#afffdc6d52699bf181dd2bfd3972a3e8d',1,'matrix.c']]],
+  ['issym_31',['IsSym',['../inclusions_8h.html#abb13ba21331fcf9b62962e0400e3cfa4',1,'matrix.c']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['isortho_27',['IsOrtho',['../inclusions_8h.html#afffdc6d52699bf181dd2bfd3972a3e8d',1,'matrix.c']]],
-  ['issym_28',['IsSym',['../inclusions_8h.html#abb13ba21331fcf9b62962e0400e3cfa4',1,'matrix.c']]]
+  ['cross_29',['Cross',['../inclusions_8h.html#ad79d639bdd3f333ad7df4270ecdac412',1,'matrix.c']]]
 ];

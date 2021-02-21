@@ -1,4 +1,4 @@
-.TH "src/inclusions.h" 3 "Sat Feb 20 2021" "Symmetric matrix eigenvalues calculation" \" -*- nroff -*-
+.TH "src/inclusions.h" 3 "Mon Feb 22 2021" "Symmetric matrix eigenvalues calculation" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -35,7 +35,7 @@ src/inclusions.h
 .RI "#define \fBauthor\fP   'Serge NKS'"
 .br
 .ti -1c
-.RI "#define \fBTOL\fP   1E\-6"
+.RI "#define \fBTOL\fP   1e\-5"
 .br
 .in -1c
 .SS "Functions"
@@ -43,6 +43,9 @@ src/inclusions.h
 .in +1c
 .ti -1c
 .RI "char * \fBstrdup\fP (const char *)"
+.br
+.ti -1c
+.RI "void * \fBalloca\fP (size_t size)"
 .br
 .ti -1c
 .RI "int \fBmat_print\fP (size_t n, size_t m, const double *in)"
@@ -86,10 +89,12 @@ src/inclusions.h
 
 .SS "#define INCLUSIONS_H_INCLUDED"
 
-.SS "#define TOL   1E\-6"
+.SS "#define TOL   1e\-5"
 
 .SH "Function Documentation"
 .PP 
+.SS "void* alloca (size_t size)"
+
 .SS "int Cross (size_t Anrow, size_t Bnrow, size_t Ancol, size_t Nncol, const double * A, const double * B, double * C)\fC [inline]\fP"
 Calculates the cross product of the A by B A*B=C and put the result into C\&. Their dimension must agree\&. c(i,j)=sum( a(i,k)*b(k,j)), 1<k<a_nrow and a_ncol == b_nrow C is a_nrow-by-b_ncol matrix
 .SS "int IsOrtho (size_t n, const double * in)"
