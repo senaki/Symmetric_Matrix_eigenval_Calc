@@ -2,8 +2,9 @@
 REM:Makefie
 set src=src/matrix.c src/jacobi.c src/main.c
 set obj=matrix.o jacobi.o main.o
-set opt1= -static -std=gnu11 -O3 -lm -W -Wall
-REM : change the path to gcc 
+REM:-U TOL -D"TOL=1E-5"
+set opt1= -static -O -std=gnu11 -lm -W -Wall -g
+REM : change the path to gcc
 set gcc="c:\mingw\bin\gcc.exe"
 set prog=rotjacobi.exe
 if "%1"=="clean" goto clean
@@ -13,15 +14,15 @@ if "%1"=="all" goto all
 REM: Compiling the code
 :create_obj
 echo Compiling %src%
-gcc  -c %src% %opt1%
+gcc %opt1% -c %src%
 exit
 :create_exe
 echo Assembling %prog%
-gcc %obj% -o %prog%
+gcc %obj% -g -o %prog%
 exit
 :all
 echo Compiling %src%
-gcc %src% %opt1% -o %prog%
+gcc %opt1% %src% -o %prog%
 exit
 :clean
 echo Deleting of %obj%
