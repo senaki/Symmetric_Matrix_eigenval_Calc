@@ -19,7 +19,7 @@ int mat_write(size_t n, size_t m, const double *mat, FILE* stream )
 	fprintf( stream, "# matrix size : %lu x %lu\n", n, m);
    	for( size_t i=0 ; i < n ; i++ ){
 			for( size_t j=0 ; j < m ; j++ ) {
-				fprintf(stream, "%.4lf\t", mat[i*m + j]) ;
+				fprintf(stream, "%#-8.4lf\t", mat[i*m + j]) ;
 			}
 			fputc('\n', stream ) ;
     }
@@ -42,13 +42,13 @@ int mat_print(size_t n, size_t m, const double *mat)
 	puts("[");
 	for(i=0; i < n; i++)
 	{
-		for( j=0 ; j< m ; j++ )  printf("%.4lf\t", mat[i*m + j]);
+		for( j=0 ; j< m ; j++ )  printf("%-8.4lf|\t", mat[i*m + j]);
 		putchar('\n') ;
 	}
 	puts("]");
 	return 0;
 }
-int IsSym( size_t n, const double *in )
+_Bool IsSym( size_t n, const double *in )
 {
   /**
   \brief Checks if the matrix in is symmetric
@@ -59,16 +59,16 @@ int IsSym( size_t n, const double *in )
   size_t i, j=0;
   if( in==NULL )
   {
-    fputs("\033[31mThe Matrix is not a square or is a NULL pointer\033[0m", stderr);
-    return -1;
+    fputs("\033[31mError : NULL pointer\033[0m", stderr);
+    return false;
   }
   for( i=0 ; i < n; i++ ){
     for ( j=n-1 ; j>i; j-- )
     {
-      if( in[j*n + i] != in[ i*n + j ] ) return 0 ; //not symmetric
+      if( in[j*n + i] != in[ i*n + j ] ) return false ; //not symmetric
     }
   }
-  return 1 ;
+  return true ;
 }
 void mat_sum(size_t n, const double *a, const double *b, double *out)
 {
@@ -147,7 +147,7 @@ int IsOrtho(size_t n, const double *in)
   while( i < n );
   return (i == n) ? 1 : 0 ;
 }
-double (*mat_eye(const size_t dim))[]
+double (*mat_eye(const size_t dim) )[]
 {
   /**
 	\brief Returns the square Identy matrix of dimension dim
@@ -173,4 +173,34 @@ int mat_zeros(size_t n, size_t m, double *mat)
 	if((n<1)||(m<1)) return 0;
 	memset(mat, 0, n*m*sizeof(double));
   return 1;
+}
+//----
+void welcom_msg(const char *msg){
+/**
+	\function welcom_msg(const char *msg)
+	\brief Display msg content as a banner
+	\param msg character string to display
+
+	Displays the content of the msg character string into a banner.
+	Serves as welcome message
+*/
+	FILE *fidFLAG;
+	unsigned int FLAG=0;;
+	if ( (fidFLAG=fopen(".flag","r+")) == NULL ){
+		fidFLAG=fopen(".flag", "w+");
+		size_t msgLen = strlen(msg), i ;
+		printf("\033[33m") ;
+		for ( i=0 ; i < msgLen ; i++ ) printf("*") ;
+		printf("\n%s\n", msg) ;
+		for ( i=0 ; i < msgLen ; i++ ) printf("*") ;
+		printf("\033[0m\n") ;		FLAG++;
+		fprintf(fidFLAG,"%u", FLAG);
+		fclose(fidFLAG);
+	}
+	else {
+		fscanf(fidFLAG,"%u", &FLAG);
+		FLAG++;
+		fprintf(fidFLAG,"%u", FLAG);
+		fclose(fidFLAG);
+	}
 }

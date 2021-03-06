@@ -9,13 +9,13 @@ It is a 2015 MSc project, revisited and optimized, published just to show you my
 ## Running code
 On Unix-Like distribution, run :
 
-`./rotjacobi /path/to/inputfile /path/to/store/output/`
+`./rotjacobi /path/to/inputfile /path/to/store/outputfile`
 
-Example :  `rotjacobi ./test.dat ./`
+Example :  `rotjacobi ./test.dat ./eigval_test.dat`
 
 Output :  
 
-    /path/to/inputfile Dim=%u Rotations=%lu Duration=%ld ms
+    /path/to/inputfile : Dim NbRot Duration ms
 
 ## Input file structure
 The first line contains the matrix dimension n.
