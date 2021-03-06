@@ -7,6 +7,8 @@
 double($\ast$ \textbf{ mat\+\_\+eye} (const size\+\_\+t dim))[$\,$]
 \item 
 int \textbf{ mat\+\_\+zeros} (size\+\_\+t n, size\+\_\+t m, double $\ast$mat)
+\item 
+void \textbf{ welcom\+\_\+msg} (const char $\ast$msg)
 \end{DoxyCompactItemize}
 
 
@@ -34,3 +36,15 @@ Return a pointer to a dim-\/by-\/dim matrix M[dim][dim] dynamically allocated. T
 Sets to zero all the elements of n-\/by-\/m matrix mat \begin{DoxyReturn}{Returns}
 1 if succeed, 0 instead.
 \end{DoxyReturn}
+\mbox{\label{matrix_8c_aed1337d2f15a112a5783239c4d1b7b86}} 
+\index{matrix.c@{matrix.c}!welcom\_msg@{welcom\_msg}}
+\index{welcom\_msg@{welcom\_msg}!matrix.c@{matrix.c}}
+\doxysubsubsection{welcom\_msg()}
+{\footnotesize\ttfamily void welcom\+\_\+msg (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg }\end{DoxyParamCaption})}
+
+\textbackslash{}function \doxyref{welcom\+\_\+msg(const char $\ast$msg)}{p.}{matrix_8c_aed1337d2f15a112a5783239c4d1b7b86} Display msg content as a banner 
+\begin{DoxyParams}{Parameters}
+{\em msg} & character string to display\\
+\hline
+\end{DoxyParams}
+Displays the content of the msg character string into a banner. Serves as welcome message

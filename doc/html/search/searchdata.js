@@ -1,27 +1,30 @@
 var indexSectionsWithContent =
 {
-  0: "_acijmstw",
-  1: "ijm",
-  2: "acijmstw",
-  3: "m",
-  4: "_ait"
+  0: "_acfijmstw",
+  1: "m",
+  2: "ijm",
+  3: "acijmstw",
+  4: "f",
+  5: "_at"
 };
 
 var indexSectionNames =
 {
   0: "all",
-  1: "files",
-  2: "functions",
-  3: "variables",
-  4: "defines"
+  1: "namespaces",
+  2: "files",
+  3: "functions",
+  4: "variables",
+  5: "defines"
 };
 
 var indexSectionLabels =
 {
   0: "All",
-  1: "Files",
-  2: "Functions",
-  3: "Variables",
-  4: "Macros"
+  1: "Namespaces",
+  2: "Files",
+  3: "Functions",
+  4: "Variables",
+  5: "Macros"
 };
 

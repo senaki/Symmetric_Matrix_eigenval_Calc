@@ -1,4 +1,4 @@
-.TH "src/matrix.c" 3 "Mon Feb 22 2021" "Symmetric matrix eigenvalues calculation" \" -*- nroff -*-
+.TH "src/matrix.c" 3 "Sat Mar 6 2021" "Symmetric matrix eigenvalues calculation" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -17,6 +17,9 @@ src/matrix.c
 .br
 .ti -1c
 .RI "int \fBmat_zeros\fP (size_t n, size_t m, double *mat)"
+.br
+.ti -1c
+.RI "void \fBwelcom_msg\fP (const char *msg)"
 .br
 .in -1c
 .SH "Function Documentation"
@@ -44,6 +47,15 @@ Sets to zero all the elements of n-by-m matrix mat
 .RE
 .PP
 
+.SS "void welcom_msg (const char * msg)"
+\\function \fBwelcom_msg(const char *msg)\fP Display msg content as a banner 
+.PP
+\fBParameters\fP
+.RS 4
+\fImsg\fP character string to display
+.RE
+.PP
+Displays the content of the msg character string into a banner\&. Serves as welcome message
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for Symmetric matrix eigenvalues calculation from the source code\&.

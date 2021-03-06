@@ -6,18 +6,15 @@
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$libgen.\+h$>$}\newline
 {\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
 \doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \textbf{ \+\_\+\+POSIX\+\_\+\+C\+\_\+\+SOURCE}~200809L
 \item 
-\#define \textbf{ \+\_\+\+GNU\+\_\+\+SOURCE}
-\item 
-\#define \textbf{ INCLUSIONS\+\_\+\+H\+\_\+\+INCLUDED}
-\item 
 \#define \textbf{ author}~\char`\"{}Serge NKS\char`\"{}
 \item 
-\#define \textbf{ TOL}~1e-\/5
+\#define \textbf{ TOL}~1e-\/3
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -30,9 +27,9 @@ int \textbf{ mat\+\_\+print} (size\+\_\+t n, size\+\_\+t m, const double $\ast$i
 \item 
 int \textbf{ mat\+\_\+write} (size\+\_\+t n, size\+\_\+t m, const double $\ast$a, FILE $\ast$stream)
 \item 
-size\+\_\+t \textbf{ jacobi} (size\+\_\+t n, double($\ast$m)[n])
-\begin{DoxyCompactList}\small\item\em Finds the eigenvalues of symmetric matrix M by Jacobi\textquotesingle{}s method. See \doxyref{matrix.\+c}{p.}{matrix_8c} and \doxyref{inclusions.\+h}{p.}{inclusions_8h} files for descriptions of the functions used in this code. \end{DoxyCompactList}\item 
-int \textbf{ Is\+Sym} (size\+\_\+t n, const double $\ast$in)
+size\+\_\+t \textbf{ jacobi} (size\+\_\+t n, double M[$\,$][n])
+\item 
+\+\_\+\+Bool \textbf{ Is\+Sym} (size\+\_\+t n, const double $\ast$in)
 \item 
 int \textbf{ Is\+Ortho} (size\+\_\+t n, const double $\ast$in)
 \item 
@@ -45,16 +42,12 @@ void \textbf{ mat\+\_\+sum} (size\+\_\+t n, const double $\ast$a, const double $
 int \textbf{ mat\+\_\+zeros} (size\+\_\+t n, size\+\_\+t m, double $\ast$mat)
 \item 
 double($\ast$ \textbf{ mat\+\_\+eye} (const size\+\_\+t dim))[$\,$]
+\item 
+void \textbf{ welcom\+\_\+msg} (const char $\ast$msg)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
-\mbox{\label{inclusions_8h_a369266c24eacffb87046522897a570d5}} 
-\index{inclusions.h@{inclusions.h}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
-\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!inclusions.h@{inclusions.h}}
-\doxysubsubsection{\_GNU\_SOURCE}
-{\footnotesize\ttfamily \#define \+\_\+\+GNU\+\_\+\+SOURCE}
-
 \mbox{\label{inclusions_8h_a3024ccd4a9af5109d24e6c57565d74a1}} 
 \index{inclusions.h@{inclusions.h}!\_POSIX\_C\_SOURCE@{\_POSIX\_C\_SOURCE}}
 \index{\_POSIX\_C\_SOURCE@{\_POSIX\_C\_SOURCE}!inclusions.h@{inclusions.h}}
@@ -67,17 +60,11 @@ double($\ast$ \textbf{ mat\+\_\+eye} (const size\+\_\+t dim))[$\,$]
 \doxysubsubsection{author}
 {\footnotesize\ttfamily \#define author~\char`\"{}Serge NKS\char`\"{}}
 
-\mbox{\label{inclusions_8h_a7e817f47bf01a5a48982c5eb41446c4f}} 
-\index{inclusions.h@{inclusions.h}!INCLUSIONS\_H\_INCLUDED@{INCLUSIONS\_H\_INCLUDED}}
-\index{INCLUSIONS\_H\_INCLUDED@{INCLUSIONS\_H\_INCLUDED}!inclusions.h@{inclusions.h}}
-\doxysubsubsection{INCLUSIONS\_H\_INCLUDED}
-{\footnotesize\ttfamily \#define INCLUSIONS\+\_\+\+H\+\_\+\+INCLUDED}
-
 \mbox{\label{inclusions_8h_a156b862ebf6d213f5da19b9e3ccb779e}} 
 \index{inclusions.h@{inclusions.h}!TOL@{TOL}}
 \index{TOL@{TOL}!inclusions.h@{inclusions.h}}
 \doxysubsubsection{TOL}
-{\footnotesize\ttfamily \#define TOL~1e-\/5}
+{\footnotesize\ttfamily \#define TOL~1e-\/3}
 
 
 
@@ -105,11 +92,11 @@ Checks if the matrix in is orthogonal
 \begin{DoxyReturn}{Returns}
 1 if true, 0 instead
 \end{DoxyReturn}
-\mbox{\label{inclusions_8h_abb13ba21331fcf9b62962e0400e3cfa4}} 
+\mbox{\label{inclusions_8h_a7921193ffb7e608e20df5c833aee5981}} 
 \index{inclusions.h@{inclusions.h}!IsSym@{IsSym}}
 \index{IsSym@{IsSym}!inclusions.h@{inclusions.h}}
 \doxysubsubsection{IsSym()}
-{\footnotesize\ttfamily int Is\+Sym (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n,  }\item[{const double $\ast$}]{in }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \+\_\+\+Bool Is\+Sym (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n,  }\item[{const double $\ast$}]{in }\end{DoxyParamCaption})}
 
 Checks if the matrix in is symmetric
 
@@ -121,26 +108,12 @@ Checks if the matrix in is symmetric
 \begin{DoxyReturn}{Returns}
 0 if success, otherwise -\/1
 \end{DoxyReturn}
-\mbox{\label{inclusions_8h_a40a9fb97b762b5729e2bf00f1a85619f}} 
+\mbox{\label{inclusions_8h_a0a15c3b664d5fc206f2af6d10a8d6d48}} 
 \index{inclusions.h@{inclusions.h}!jacobi@{jacobi}}
 \index{jacobi@{jacobi}!inclusions.h@{inclusions.h}}
 \doxysubsubsection{jacobi()}
-{\footnotesize\ttfamily jacobi (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n,  }\item[{double($\ast$)}]{M[n] }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily size\+\_\+t jacobi (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n,  }\item[{double}]{M[$\,$][n] }\end{DoxyParamCaption})}
 
-
-
-Finds the eigenvalues of symmetric matrix M by Jacobi\textquotesingle{}s method. See \doxyref{matrix.\+c}{p.}{matrix_8c} and \doxyref{inclusions.\+h}{p.}{inclusions_8h} files for descriptions of the functions used in this code. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n} & dimension of the square matrix \\
-\hline
-{\em M} & symmetric matrix \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Niteration the number of iterations 
-\end{DoxyReturn}
 \mbox{\label{inclusions_8h_a64332b31c0ddb5cb8e039db69bc8045a}} 
 \index{inclusions.h@{inclusions.h}!mat\_eye@{mat\_eye}}
 \index{mat\_eye@{mat\_eye}!inclusions.h@{inclusions.h}}
@@ -234,4 +207,15 @@ Sets to zero all the elements of n-\/by-\/m matrix mat \begin{DoxyReturn}{Return
 \doxysubsubsection{transpose()}
 {\footnotesize\ttfamily void transpose (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{nrow,  }\item[{size\+\_\+t}]{ncol,  }\item[{const double $\ast$}]{A,  }\item[{double $\ast$}]{out }\end{DoxyParamCaption})}
 
-Calculates the transpose of a nrow-\/by-\/ncol matrix A and put it in the matrix ncol-\/by-\/nrow A and out must be declared agree with the the dimension
+Calculates the transpose of a nrow-\/by-\/ncol matrix A and put it in the matrix ncol-\/by-\/nrow A and out must be declared agree with the the dimension\mbox{\label{inclusions_8h_aed1337d2f15a112a5783239c4d1b7b86}} 
+\index{inclusions.h@{inclusions.h}!welcom\_msg@{welcom\_msg}}
+\index{welcom\_msg@{welcom\_msg}!inclusions.h@{inclusions.h}}
+\doxysubsubsection{welcom\_msg()}
+{\footnotesize\ttfamily void welcom\+\_\+msg (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg }\end{DoxyParamCaption})}
+
+\textbackslash{}function \doxyref{welcom\+\_\+msg(const char $\ast$msg)}{p.}{matrix_8c_aed1337d2f15a112a5783239c4d1b7b86} Display msg content as a banner 
+\begin{DoxyParams}{Parameters}
+{\em msg} & character string to display\\
+\hline
+\end{DoxyParams}
+Displays the content of the msg character string into a banner. Serves as welcome message

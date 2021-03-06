@@ -9,10 +9,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -50,23 +46,6 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('inclusions_8h.html',''); initResizable(); });
-/* @license-end */
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -81,6 +60,11 @@ $(document).ready(function(){initNavTree('inclusions_8h.html',''); initResizable
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
@@ -95,6 +79,7 @@ $(document).ready(function(){initNavTree('inclusions_8h.html',''); initResizable
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;libgen.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 </div>
 <p><a href="inclusions_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -102,13 +87,9 @@ $(document).ready(function(){initNavTree('inclusions_8h.html',''); initResizable
 Macros</h2></td></tr>
 <tr class="memitem:a3024ccd4a9af5109d24e6c57565d74a1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a3024ccd4a9af5109d24e6c57565d74a1">_POSIX_C_SOURCE</a>&#160;&#160;&#160;200809L</td></tr>
 <tr class="separator:a3024ccd4a9af5109d24e6c57565d74a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a369266c24eacffb87046522897a570d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a369266c24eacffb87046522897a570d5">_GNU_SOURCE</a></td></tr>
-<tr class="separator:a369266c24eacffb87046522897a570d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e817f47bf01a5a48982c5eb41446c4f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a7e817f47bf01a5a48982c5eb41446c4f">INCLUSIONS_H_INCLUDED</a></td></tr>
-<tr class="separator:a7e817f47bf01a5a48982c5eb41446c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8624969d4fe8e65e0f73a3acc71fd1a5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a8624969d4fe8e65e0f73a3acc71fd1a5">author</a>&#160;&#160;&#160;&quot;Serge NKS&quot;</td></tr>
 <tr class="separator:a8624969d4fe8e65e0f73a3acc71fd1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a156b862ebf6d213f5da19b9e3ccb779e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a156b862ebf6d213f5da19b9e3ccb779e">TOL</a>&#160;&#160;&#160;1e-5</td></tr>
+<tr class="memitem:a156b862ebf6d213f5da19b9e3ccb779e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a156b862ebf6d213f5da19b9e3ccb779e">TOL</a>&#160;&#160;&#160;1e-3</td></tr>
 <tr class="separator:a156b862ebf6d213f5da19b9e3ccb779e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -121,11 +102,10 @@ Functions</h2></td></tr>
 <tr class="separator:ada2589940401389c75425d0cd7441789"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a894c9dc7d87ddcf69425b414c340fd8d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a894c9dc7d87ddcf69425b414c340fd8d">mat_write</a> (size_t n, size_t m, const double *a, FILE *stream)</td></tr>
 <tr class="separator:a894c9dc7d87ddcf69425b414c340fd8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40a9fb97b762b5729e2bf00f1a85619f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a40a9fb97b762b5729e2bf00f1a85619f">jacobi</a> (size_t n, double(*m)[n])</td></tr>
-<tr class="memdesc:a40a9fb97b762b5729e2bf00f1a85619f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the eigenvalues of symmetric matrix M by Jacobi's method. See <a class="el" href="matrix_8c.html">matrix.c</a> and <a class="el" href="inclusions_8h.html">inclusions.h</a> files for descriptions of the functions used in this code.  <a href="inclusions_8h.html#a40a9fb97b762b5729e2bf00f1a85619f">More...</a><br /></td></tr>
-<tr class="separator:a40a9fb97b762b5729e2bf00f1a85619f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb13ba21331fcf9b62962e0400e3cfa4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#abb13ba21331fcf9b62962e0400e3cfa4">IsSym</a> (size_t n, const double *in)</td></tr>
-<tr class="separator:abb13ba21331fcf9b62962e0400e3cfa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a15c3b664d5fc206f2af6d10a8d6d48"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a0a15c3b664d5fc206f2af6d10a8d6d48">jacobi</a> (size_t n, double M[][n])</td></tr>
+<tr class="separator:a0a15c3b664d5fc206f2af6d10a8d6d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7921193ffb7e608e20df5c833aee5981"><td class="memItemLeft" align="right" valign="top">_Bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a7921193ffb7e608e20df5c833aee5981">IsSym</a> (size_t n, const double *in)</td></tr>
+<tr class="separator:a7921193ffb7e608e20df5c833aee5981"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afffdc6d52699bf181dd2bfd3972a3e8d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#afffdc6d52699bf181dd2bfd3972a3e8d">IsOrtho</a> (size_t n, const double *in)</td></tr>
 <tr class="separator:afffdc6d52699bf181dd2bfd3972a3e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad48400d0d1026af24c42134587ebba16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#ad48400d0d1026af24c42134587ebba16">transpose</a> (size_t nrow, size_t ncol, const double *A, double *out)</td></tr>
@@ -138,22 +118,10 @@ Functions</h2></td></tr>
 <tr class="separator:a345b8037b15465df1fd4143ea6d21ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64332b31c0ddb5cb8e039db69bc8045a"><td class="memItemLeft" align="right" valign="top">double(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#a64332b31c0ddb5cb8e039db69bc8045a">mat_eye</a> (const size_t dim))[]</td></tr>
 <tr class="separator:a64332b31c0ddb5cb8e039db69bc8045a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed1337d2f15a112a5783239c4d1b7b86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inclusions_8h.html#aed1337d2f15a112a5783239c4d1b7b86">welcom_msg</a> (const char *msg)</td></tr>
+<tr class="separator:aed1337d2f15a112a5783239c4d1b7b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a369266c24eacffb87046522897a570d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&nbsp;</a></span>_GNU_SOURCE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define _GNU_SOURCE</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a3024ccd4a9af5109d24e6c57565d74a1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3024ccd4a9af5109d24e6c57565d74a1">&#9670;&nbsp;</a></span>_POSIX_C_SOURCE</h2>
 
@@ -182,20 +150,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7e817f47bf01a5a48982c5eb41446c4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e817f47bf01a5a48982c5eb41446c4f">&#9670;&nbsp;</a></span>INCLUSIONS_H_INCLUDED</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define INCLUSIONS_H_INCLUDED</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a156b862ebf6d213f5da19b9e3ccb779e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a156b862ebf6d213f5da19b9e3ccb779e">&#9670;&nbsp;</a></span>TOL</h2>
 
@@ -203,7 +157,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define TOL&#160;&#160;&#160;1e-5</td>
+          <td class="memname">#define TOL&#160;&#160;&#160;1e-3</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -326,14 +280,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="abb13ba21331fcf9b62962e0400e3cfa4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb13ba21331fcf9b62962e0400e3cfa4">&#9670;&nbsp;</a></span>IsSym()</h2>
+<a id="a7921193ffb7e608e20df5c833aee5981"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7921193ffb7e608e20df5c833aee5981">&#9670;&nbsp;</a></span>IsSym()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int IsSym </td>
+          <td class="memname">_Bool IsSym </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>n</em>, </td>
@@ -362,14 +316,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a40a9fb97b762b5729e2bf00f1a85619f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40a9fb97b762b5729e2bf00f1a85619f">&#9670;&nbsp;</a></span>jacobi()</h2>
+<a id="a0a15c3b664d5fc206f2af6d10a8d6d48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a15c3b664d5fc206f2af6d10a8d6d48">&#9670;&nbsp;</a></span>jacobi()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">jacobi </td>
+          <td class="memname">size_t jacobi </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>n</em>, </td>
@@ -377,8 +331,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double(*)&#160;</td>
-          <td class="paramname"><em>M</em>[n]&#160;</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>M</em>[][n]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -387,16 +341,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Finds the eigenvalues of symmetric matrix M by Jacobi's method. See <a class="el" href="matrix_8c.html">matrix.c</a> and <a class="el" href="inclusions_8h.html">inclusions.h</a> files for descriptions of the functions used in this code. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n</td><td>dimension of the square matrix </td></tr>
-    <tr><td class="paramname">M</td><td>symmetric matrix </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Niteration the number of iterations </dd></dl>
 
 </div>
 </div>
@@ -663,14 +607,35 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-</div><!-- contents -->
-</div><!-- doc-content -->
-<!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="inclusions_8h.html">inclusions.h</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
-  </ul>
+<a id="aed1337d2f15a112a5783239c4d1b7b86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed1337d2f15a112a5783239c4d1b7b86">&#9670;&nbsp;</a></span>welcom_msg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void welcom_msg </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>\function <a class="el" href="matrix_8c.html#aed1337d2f15a112a5783239c4d1b7b86">welcom_msg(const char *msg)</a> Display msg content as a banner </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>character string to display</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Displays the content of the msg character string into a banner. Serves as welcome message</p>
+
 </div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
 </body>
 </html>

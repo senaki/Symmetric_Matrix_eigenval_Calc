@@ -1,4 +1,4 @@
-.TH "src/jacobi.c" 3 "Mon Feb 22 2021" "Symmetric matrix eigenvalues calculation" \" -*- nroff -*-
+.TH "src/jacobi.c" 3 "Sat Mar 6 2021" "Symmetric matrix eigenvalues calculation" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -13,29 +13,12 @@ src/jacobi.c
 
 .in +1c
 .ti -1c
-.RI "size_t \fBjacobi\fP (size_t n, double(*M)[n])"
+.RI "size_t \fBjacobi\fP (size_t n, double M[][n])"
 .br
-.RI "Finds the eigenvalues of symmetric matrix M by Jacobi's method\&. See \fBmatrix\&.c\fP and \fBinclusions\&.h\fP files for descriptions of the functions used in this code\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
-.SS "size_t jacobi (size_t n, double(*) M[n])"
-
-.PP
-Finds the eigenvalues of symmetric matrix M by Jacobi's method\&. See \fBmatrix\&.c\fP and \fBinclusions\&.h\fP files for descriptions of the functions used in this code\&. 
-.PP
-\fBParameters\fP
-.RS 4
-\fIn\fP dimension of the square matrix 
-.br
-\fIM\fP symmetric matrix 
-.RE
-.PP
-\fBReturns\fP
-.RS 4
-Niteration the number of iterations 
-.RE
-.PP
+.SS "size_t jacobi (size_t n, double M[][n])"
 
 .SH "Author"
 .PP 
