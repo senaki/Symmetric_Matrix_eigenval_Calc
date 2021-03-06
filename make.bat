@@ -3,7 +3,8 @@ REM:Makefie
 set src=src/matrix.c src/jacobi.c src/main.c
 set obj=matrix.o jacobi.o main.o
 REM:-U TOL -D"TOL=1E-5"
-set opt1= -static -O -std=gnu11 -lm -W -Wall -g
+REM: set opt1= -static -std=gnu11 -lm -W -Wall -g
+set opt1= -static -O3 -std=gnu11 -lm -W -Wall
 REM : change the path to gcc
 set gcc="c:\mingw\bin\gcc.exe"
 set prog=rotjacobi.exe

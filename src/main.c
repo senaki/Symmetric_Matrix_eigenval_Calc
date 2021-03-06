@@ -14,7 +14,7 @@ Usage : rotjacobi arg1 arg2
 */
 int main(int argc, char *argv[])
 {
-	if (argc<=2){
+	if (argc<2){
 		fprintf(stderr, "\033[31m %d argument :\n\tArg 1 : input file name;"
 		"\n\tArg 2: output file name\nEnter output path name.\033[0m\n", argc-1);
 		exit(EXIT_FAILURE);
@@ -29,24 +29,24 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	//----------------------------------------------------------------------
-	int dim, nel=-1;
-	nel+=fscanf(flux, "%d", &dim ) ;
-	double M[dim][dim] ;//= (double *)malloc(dim*dim*sizeof(double));
+	size_t dim;
+	int nel=-1;
+	nel+=fscanf(flux, "%u", &dim ) ;
+	double (*M)[dim]= (double (*)[])malloc(dim*dim*sizeof(double));
 	//Nombre d'itérations
-	int i, j ;
-	/*
+
 	if (M == NULL) {
 		fprintf(stderr, "Error : cannot allocate memory\n");
 		return EXIT_FAILURE ;
 	}
-	*/
+	size_t i, j ;
 	for ( i=0 ; i < dim ; i++ ){
 		for( j=0 ; j < dim ; j++ ){
 			nel+=fscanf( flux, "%lf", &M[i][j] ) ;
 		}
 	}
 	fclose(flux);
-	//mat_print(dim, dim, M);
+
 	if ( IsSym(dim, M[0]) == false )
 	{
 		fprintf(stderr,"This matrix is not symmetric\n");
@@ -68,9 +68,10 @@ int main(int argc, char *argv[])
 	fprintf( fout, "# total iteration : %03lu\n", Niteration ) ;
 	mat_write(1, dim, eigVal, fout);
 	fclose(fout) ;
-	printf("%s -> %s :\t%-d\t%-lu\t%-ld ms\n",
+	printf("%s -> %s :\t%-u\t%-lu\t%-ld ms\n",
 	inputFName,eigValueFName, dim, Niteration, (end-start)*1000/CLOCKS_PER_SEC);
-	//free(eigVal);	free(M);
+	//free(eigVal);
+	free(M);
 	free(eigValueFName);free(inputFName);
 	return EXIT_SUCCESS;
 }

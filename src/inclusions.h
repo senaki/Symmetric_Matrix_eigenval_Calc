@@ -2,14 +2,14 @@
 #ifndef INCLUSIONS_H_INCLUDED
 #define INCLUSIONS_H_INCLUDED
 #define author "Serge NKS"
-#define TOL 1e-4
+#define TOL 1e-3
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 #include <libgen.h>
 #include <stddef.h>
-#include <sys/mman.h>
+//#include <sys/mman.h>
 #include <stdbool.h>
 
 extern char *strdup(const char *);

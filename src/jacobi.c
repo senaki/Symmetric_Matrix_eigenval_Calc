@@ -2,7 +2,7 @@
 /**
 \brief Finds the eigenvalues of symmetric matrix M by Jacobi's method.
 See matrix.c and inclusions.h files for descriptions of the functions used in this code.
-\fn jacobi(size_t n, double **M])
+\fn jacobi(size_t n, double (*M)[n])
 \param n dimension of the square matrix
 \param M symmetric matrix
 \return Niteration the number of iterations
@@ -16,7 +16,9 @@ size_t jacobi(size_t n, double M[][n])
   idx[1] <=> line
   idx[2] <=> column
   */
-  double theta=.0, max_mat, mR[n][n], mTr[n][n], vP[n][n];
+  double theta=.0, max_mat, (*mR)[n]=(double (*)[n])malloc(n*sizeof(double[n])),
+  (*mTr)[n]=(double (*)[n])malloc(n*sizeof(double[n])),
+  (*vP)[n]=(double (*)[n])malloc(n*sizeof(double[n]));
   memset(mR,0,n*sizeof(double[n]));
   for( i=0 ; i < n; i++ )
   {
@@ -66,11 +68,11 @@ size_t jacobi(size_t n, double M[][n])
     mR[ idx[1] ][ idx[1] ] = 1;
     mR[ idx[0] ][ idx[1] ] = 0;
     mR[ idx[1] ][ idx[0] ] = 0;
-    if (Niteration > 1e4 ) {
+    if (Niteration > 1e5 ) {
       fprintf(stderr, "Warning : too much iterations. The method is not adapted to your need !\n");
       break;
     }
   } while( max_mat > TOL);
- // free(mR);  free(mTr);  free(vP);
+  free(mR);  free(mTr);  free(vP);
   return Niteration ;
 }
