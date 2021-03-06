@@ -15,7 +15,7 @@ Example :  `rotjacobi ./test.dat ./eigval_test.dat`
 
 Output :  
 
-    /path/to/inputfile : Dim NbRot Duration ms
+    /path/to/inputfile ->  /path/to/store/outputfile :  Dim     NbRot   Duration ms
 
 ## Input file structure
 The first line contains the matrix dimension n.
