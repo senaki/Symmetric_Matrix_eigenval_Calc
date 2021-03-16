@@ -86,7 +86,7 @@ void mat_sum(size_t n, const double *a, const double *b, double *out)
     for(j=0; j<n; j++) out[ i*n + j ] = a[ i*n + j ] + b[ i*n + j] ;
   }
 }
-void transpose(size_t nrow, size_t ncol, const double *A, double *out)
+inline void transpose(size_t nrow, size_t ncol, const double *A, double *out)
 {
   /**
   \fn Transpose(int nrow, int ncol, double *A, double *out)
