@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-for fich in $1/*
+for fich in $1/rndmat_*
 do
 	 # echo "$inPath/${file}"
 	 ./rotjacobi ${fich} "$2/eigval_"$(basename ${fich}) ;

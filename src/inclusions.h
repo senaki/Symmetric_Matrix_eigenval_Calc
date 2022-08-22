@@ -1,8 +1,13 @@
-#define _POSIX_C_SOURCE 200809L
+#pragma once
 #ifndef INCLUSIONS_H_INCLUDED
 #define INCLUSIONS_H_INCLUDED
+//#define _POSIX_C_SOURCE 200809L
+#define _GNU_SOURCE
+#ifndef DEBUG
+#define DEBUG false
+#endif
 #define author "Serge NKS"
-#define TOL 1e-3
+#define TOL 1.0E-3
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
